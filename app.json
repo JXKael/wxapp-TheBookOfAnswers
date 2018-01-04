@@ -1,0 +1,11 @@
+{
+  "pages": [
+    "pages/answers/answers"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "The Book Of Answer",
+    "navigationBarTextStyle": "black"
+  }
+}

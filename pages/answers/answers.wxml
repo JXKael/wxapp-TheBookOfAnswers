@@ -1,0 +1,9 @@
+<!--answers.wxml-->
+<view class="container">
+  <view class="answer">
+    <text class="answerTxt">{{answer}}</text>
+  </view>
+  <view class="button">
+    <button bindtap="onClickSearchAnswer"> search </button>
+  </view>
+</view>
