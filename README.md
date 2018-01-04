@@ -1,5 +1,6 @@
 # wxapp-The Book Of Answers
-基于[web版](https://github.com/JXKael/wxapp-TheBookOfAnswers.git)开发的微信小程序答案之书，仅作交流学习用。
+微信小程序----[答案之书](https://github.com/JXKael/wxapp-TheBookOfAnswers.git)
+仅作交流学习用
 
 ### 使用方法
 
