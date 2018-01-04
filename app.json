@@ -1,11 +1,13 @@
 {
-  "pages": [
-    "pages/answers/answers"
+  "pages":[
+    "pages/answers/answers",
+    "pages/index/index",
+    "pages/logs/logs"
   ],
-  "window": {
-    "backgroundTextStyle": "light",
+  "window":{
+    "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "The Book Of Answer",
-    "navigationBarTextStyle": "black"
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black"
   }
 }
