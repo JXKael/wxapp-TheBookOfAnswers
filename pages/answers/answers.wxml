@@ -1,9 +1,12 @@
 <!--answers.wxml-->
-<view class="container">
-  <view class="answer">
-    <text class="answerTxt">{{answer}}</text>
+<view class="container">  
+  <view class="background">
+    <image class="backgroundImg" src="../../assets/bg1.jpg" mode="aspectFill"></image> 
   </view>
-  <view class="button">
-    <button bindtap="onClickSearchAnswer"> search </button>
+  <view class="answer">
+      <text class="answerTxt">{{answer}}</text>
+  </view>
+  <view class="table">
+    <image class="tableImg" bindtap="onClickSearchAnswer" src="../../assets/table.png">search</image>
   </view>
 </view>

@@ -9,7 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    answer: "Your Answer",
+    answer: "问心，则无愧",
+    subContent: "长按圆桌，开启答案",
     lastAnswerIndex: -1,
     answers: [
       "学会珍惜",
