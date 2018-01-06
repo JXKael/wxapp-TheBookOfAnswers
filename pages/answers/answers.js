@@ -180,7 +180,7 @@ Page({
     this.inShow = true;
     setTimeout(function(){
       this.inShow = false;
-    }.bind(this), this.defaultStopDuration + this.contentDuration + this.subContentDelay + this.subContentDuration)
+    }.bind(this), this.defaultStopDuration + this.contentDuration + this.subContentDelay)
     var index = -1;
     if (this.data.lastIndex != -1) {
       // 不是第一次，需要判断重复
