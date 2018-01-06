@@ -3,13 +3,13 @@
   <view class="background">
     <image class="backgroundImg" src="../../assets/bg1.jpg" mode="aspectFill"></image> 
   </view>
-  <view class="content">
+  <view class="content" animation="{{contentAnimation}}">
       <text class="answerTxt">{{content}}</text>
   </view>
-  <view class="subContent">
+  <view class="subContent" animation="{{subContentAnimation}}">
     <text class="subContentTxt">{{subContent}}</text>
   </view>
   <view class="table">
-    <image id="table" class="tableImg" src="../../assets/table.png" bindtouchstart="touchStart" bindtouchend="touchEnd" animation="{{animation}}"></image>
+    <image id="table" class="tableImg" src="../../assets/table.png" bindtouchstart="touchStart" bindtouchend="touchEnd" animation="{{tableAnimation}}"></image>
   </view>
 </view>
