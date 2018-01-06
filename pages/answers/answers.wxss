@@ -12,10 +12,18 @@
   overflow: visible;
 }
 
-.answer{
+.content{
   color: white;
   position: fixed;
+  font-size: 20px;
   top: 20%;
+}
+
+.subContent{
+  color: white;
+  position: fixed;
+  font-size: 14px;
+  top: 30%;
 }
 
 .table{

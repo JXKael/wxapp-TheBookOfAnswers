@@ -3,10 +3,13 @@
   <view class="background">
     <image class="backgroundImg" src="../../assets/bg1.jpg" mode="aspectFill"></image> 
   </view>
-  <view class="answer">
-      <text class="answerTxt">{{answer}}</text>
+  <view class="content">
+      <text class="answerTxt">{{content}}</text>
+  </view>
+  <view class="subContent">
+    <text class="subContentTxt">{{subContent}}</text>
   </view>
   <view class="table">
-    <image class="tableImg" bindtap="onClickSearchAnswer" src="../../assets/table.png">search</image>
+    <image id="table" class="tableImg" src="../../assets/table.png" bindtouchstart="touchStart" bindtouchend="touchEnd" animation="{{animation}}"></image>
   </view>
 </view>
