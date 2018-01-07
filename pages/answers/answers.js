@@ -3,90 +3,48 @@
 //获取应用实例
 const app = getApp()
 
-Page({
+var answerData = require("./answerData.js")
 
+Page({
   /**
    * 页面的初始数据
    */
   data: {
-    content: "问心，则无愧",
-    subContent: "长按圆桌，开启答案",
-    lastIndex: -1,
-    answers: [
-      { content: "恰似一江春水向东流", subContent: "123" },
-      { content: "那是离人泪", subContent: "123" },
-      { content: "此情无计可消除", subContent: "123" },
-      { content: "生当作人杰", subContent: "123" },
-      { content: "为伊消得人憔悴", subContent: "123" },
-      { content: "剪不断，理还乱", subContent: "123" },
-      { content: "好梦留人睡", subContent: "123" },
-      { content: "老夫聊发少年狂", subContent: "123" },
-      { content: "寂寞沙洲冷", subContent: "123" },
-      { content: "相顾无言，惟有泪千行", subContent: "123" },
-      { content: "赢得生前身后名", subContent: "123" },
-      { content: "望尽天涯路", subContent: "123" },
-      { content: "过尽千帆皆不是", subContent: "123" },
-      { content: "如今俱是异乡人", subContent: "123" },
-      { content: "为有暗香来", subContent: "123" },
-      { content: "空惆怅", subContent: "123" },
-      { content: "把新桃换旧符", subContent: "123" },
-      { content: "相逢是梦中", subContent: "123" },
-      { content: "只缘身在此山中", subContent: "123" },
-      { content: "淡妆浓抹总相宜", subContent: "123" },
-      { content: "也无风雨也无晴", subContent: "123" },
-      { content: "天涯何处无芳草", subContent: "123" },
-      { content: "多情笑，早生华发", subContent: "123" },
-      { content: "腹有诗书气自华", subContent: "123" },
-      { content: "又岂在朝朝暮暮", subContent: "123" },
-      { content: "物是人非，事事休", subContent: "123" },
-      { content: "只有香如故", subContent: "123" },
-      { content: "世味薄似纱", subContent: "123" },
-      { content: "柳暗花明又一村", subContent: "123" },
-      { content: "此事古难全", subContent: "123" },
-      { content: "为有源头活水来", subContent: "123" },
-      { content: "莫等闲，白了少年头", subContent: "123" },
-      { content: "能饮一杯无", subContent: "123" },
-      { content: "润物细无声", subContent: "123" },
-      { content: "一岁一枯荣", subContent: "123" },
-      { content: "门始为君开", subContent: "123" },
-      { content: "海内存知己", subContent: "123" },
-      { content: "劝君更尽一杯酒", subContent: "123" },
-      { content: "青春作伴好还乡", subContent: "123" },
-      { content: "莫待无花空折枝", subContent: "123" },
-      { content: "天下谁人不识君", subContent: "123" },
-      { content: "天生我材必有用", subContent: "123" },
-      { content: "徒劳恨费声", subContent: "123" },
-      { content: "葡萄美酒夜光杯", subContent: "123" },
-      { content: "幽人应未眠", subContent: "123" },
-      { content: "坐观垂钓者", subContent: "123" },
-      { content: "何处春江无月明", subContent: "123" }
-      ],
+    content: "",
+    subContent: "",
     tableAnimation: "",
     contentAnimation: "",
     subContentAnimation: ""
   },
 
+  // 触摸事件
+  inShow: false,
   touchStartTime: 0,
   touchEndTime: 0,
   duration: 0,
+  // 动画
   pressDuration: 3000,
   defaultStopDuration: 1500,
   deg: 0,
   contentDuration: 1000,
   subContentDelay: 500,
   subContentDuration: 1000,
-  inShow: false,
+  
+  lastIndex: -1,
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.answerData = new answerData()
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {},
+  onReady: function () {
+    this.setDefaultContent()
+  },
 
   /**
    * 生命周期函数--监听页面显示
@@ -124,8 +82,8 @@ Page({
       this.touchStartTime = e.timeStamp
       // console.log("touch start at " + this.touchStartTime)
 
-      // 清除旧的内容
-      this.clearOldContent()
+      // 清除旧的内容-----目前调用会使文本不居中
+      // this.clearOldContent()
 
       // 设置旋转动画
       this.createTableRotateAnimation()
@@ -164,6 +122,16 @@ Page({
   },
 
   /**
+   * 设置默认content文本
+   */
+  setDefaultContent: function () {
+    this.setData({
+      content: this.answerData.getDefaultContent(),
+      subContent: this.answerData.getDefaultSubContent()
+    })
+  },
+
+  /**
    * 清除旧的content
    */
   clearOldContent: function () {
@@ -181,22 +149,25 @@ Page({
     setTimeout(function(){
       this.inShow = false;
     }.bind(this), this.defaultStopDuration + this.contentDuration + this.subContentDelay)
+
     var index = -1;
-    if (this.data.lastIndex != -1) {
+    var length = this.answerData.getAnswerLength()
+    if (this.lastIndex != -1) {
       // 不是第一次，需要判断重复
       do {
         // 防止和上次重复
-        index = Math.floor(Math.random() * this.data.answers.length)
-      } while (this.data.lastIndex == index)
+        index = Math.floor(Math.random() * length)
+      } while (this.lastIndex == index)
     } else {
       // 第一次直接随机
-      index = Math.floor(Math.random() * this.data.answers.length)
+      index = Math.floor(Math.random() * length)
     }
     // 更新数据以更新显示
+    var answer = this.answerData.getAnswerByIndex(index)
+    this.lastIndex = index
     this.setData({
-      content: this.data.answers[index].content,
-      subContent: this.data.answers[index].subContent,
-      lastIndex: index
+      content: answer.content,
+      subContent: answer.subContent
     })
   },
 
@@ -223,9 +194,9 @@ Page({
       duration: 500,
       timingFunction: 'ease-out',
     })
-    var deg = 0.12 * Math.min(this.duration, this.pressDuration)
-    this.deg += Math.round(deg)
-    // console.log(this.deg)
+    var degree = 0.12 * Math.min(this.duration, this.pressDuration)
+    this.deg += Math.round(degree)
+    console.log(this.deg)
     interrupAnimation.rotateZ(this.deg).step()
     // 输出动画
     this.setData({
@@ -270,14 +241,14 @@ Page({
   },
 
   /**
-   * content内容初始设置
+   * content内容动画初始设置
    */
   createContentStartAnimation: function() {
     var animation = wx.createAnimation({
       duration: 1,
       timingFunction: 'step-start',
     })
-    animation.opacity(0).translateY(20).scale(0.8).step()
+    animation.opacity(0).translateY(40).scale(0.8).step()
     // 输出动画
     this.setData({
       contentAnimation: animation.export()
@@ -290,9 +261,9 @@ Page({
   createContentShowAnimation: function () {
     var animation = wx.createAnimation({
       duration: this.contentDuration,
-      timingFunction: 'ease-out',
+      timingFunction: 'linear',
     })
-    animation.opacity(1).translateY(-20).scale(1).step()
+    animation.opacity(1).translateY(0).scale(1).step()
     // 输出动画
     this.setData({
       contentAnimation: animation.export()
@@ -315,7 +286,7 @@ Page({
   },
 
   /**
-   * content内容出现动画
+   * subContent内容出现动画
    */
   createSubContentShowAnimation: function () {
     var animation = wx.createAnimation({

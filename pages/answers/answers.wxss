@@ -15,14 +15,14 @@
 .content{
   color: white;
   position: fixed;
-  font-size: 20px;
+  font-size: 25px;
   top: 20%;
 }
 
 .subContent{
   color: white;
   position: fixed;
-  font-size: 14px;
+  font-size: 10px;
   top: 30%;
 }
 
@@ -35,6 +35,6 @@
 }
 
 .tableImg{
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
 }
