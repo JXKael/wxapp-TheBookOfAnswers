@@ -40,8 +40,8 @@
   color: white;
   position: fixed;
   text-align: center;
-  font-size: 15px;
-  bottom: 380rpx;
+  font-size: 14px;
+  bottom: 400rpx;
 }
 
 .table{
