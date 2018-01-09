@@ -22,6 +22,7 @@ Page({
 
   // 触摸事件
   inShow: false,
+  inRotation: false,
   touchStartTime: 0,
   touchEndTime: 0,
   duration: 0,
@@ -33,6 +34,8 @@ Page({
   contentDuration: 1000,
   subContentDelay: 500,
   subContentDuration: 1000,
+  expOpacity: 1,
+  expDuration: 500,
   
   lastIndex: -1,
 
@@ -84,8 +87,9 @@ Page({
   onShareAppMessage: function () {},
 
   touchStart: function (e) {
-    if (!this.inShow)
+    if (!this.inShow && !this.inRotation)
     {
+      this.inRotation = true
       this.touchStartTime = e.timeStamp
       // console.log("touch start at " + this.touchStartTime)
 
@@ -113,7 +117,7 @@ Page({
   },
 
   touchEnd: function (e) {
-    if (!this.inShow)
+    if (!this.inShow && this.inRotation)
     {
       this.touchEndTime = e.timeStamp
       // console.log("touch end at " + this.touchEndTime)
@@ -134,7 +138,15 @@ Page({
         // 清除计时-----音频停止播放
         clearTimeout(this.timeout_audioPress)
         this.createTableInterruptAnimation()
+        this.inRotation = false
       }
+    }
+  },
+
+  bindTap: function(e) {
+    if (!this.inShow && !this.inRotation)
+    {
+      this.createExpShowAnimation()
     }
   },
 
@@ -163,9 +175,10 @@ Page({
    * 设置新的content
    */
   setNewContent: function () {
-    this.inShow = true;
+    this.inShow = true
+    this.inRotation = false
     setTimeout(function(){
-      this.inShow = false;
+      this.inShow = false
     }.bind(this), this.defaultStopDuration + this.contentDuration + this.subContentDelay)
 
     var index = -1;
@@ -242,7 +255,7 @@ Page({
    * 设置table停止动画
    */
   createTableStopAnimation: function () {
-    this.deg += this.rotateDeg
+    this.deg = this.deg + this.rotateDeg
     // console.log("当前角度: " + this.deg)
     // console.log("除以360: " + this.deg / 360)
     // console.log("取整: " + Math.floor(this.deg / 360))
@@ -347,14 +360,33 @@ Page({
    * exp内容动画初始设置
    */
   createExpStartAnimation: function () {
+    this.expOpacity = 0
+    // console.log("exp透明度: " + this.expOpacity)
     var animation = wx.createAnimation({
       duration: 1,
       timingFunction: 'step-start',
     })
-    animation.opacity(1).translateY(-40).step()
+    animation.opacity(0).step()
     // 输出动画
     this.setData({
       expAnimation: animation.export()
     })
   },
+
+  /**
+   * exp内容出现动画
+   */
+  createExpShowAnimation: function () {
+    var animation = wx.createAnimation({
+      duration: this.expDuration,
+      timingFunction: 'linear',
+    })
+    this.expOpacity = this.expOpacity + 1
+    // console.log((this.expOpacity) % 2)
+    animation.opacity((this.expOpacity) % 2).step()
+    // 输出动画
+    this.setData({
+      expAnimation: animation.export()
+    })
+  }
 })

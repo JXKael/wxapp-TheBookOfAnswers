@@ -14,6 +14,6 @@
     <text class="expTxt">{{exp}}</text>
   </view>
   <view class="table">
-    <image id="table" class="tableImg" src="../../assets/table.png" bindtouchstart="touchStart" bindtouchend="touchEnd" animation="{{tableAnimation}}"></image>
+    <image id="table" class="tableImg" src="../../assets/table.png" bindtap="bindTap" bindlongpress="touchStart" bindtouchend="touchEnd" animation="{{tableAnimation}}"></image>
   </view>
 </view>
