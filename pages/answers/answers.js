@@ -5,6 +5,8 @@ const app = getApp()
 
 var answerData = require("./answerData.js")
 
+const innerAudioContext = wx.createInnerAudioContext()
+
 Page({
   /**
    * 页面的初始数据
@@ -54,6 +56,8 @@ Page({
     this.setDefaultContent()
     // 音频上下文
     this.audioCtx = wx.createAudioContext("myAudio")
+    innerAudioContext.src = this.data.audio_src
+    //'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E061FF02C31F716658E5C81F5594D561F2E88B854E81CAAB7806D5E4F103E55D33C16F3FAC506D1AB172DE8600B37E43FAD&fromtag=46'
   },
 
   /**
@@ -86,7 +90,7 @@ Page({
    */
   onShareAppMessage: function () {},
 
-  touchStart: function (e) {
+  longPress: function (e) {
     if (!this.inShow && !this.inRotation)
     {
       this.inRotation = true
@@ -186,7 +190,7 @@ Page({
     this.inRotation = false
     setTimeout(function(){
       this.inShow = false
-      console.log("好了")
+      // console.log("好了")
     }.bind(this), Math.max(this.defaultStopDuration, this.contentDuration) + this.subContentDelay + this.subContentDuration)
 
     var index = -1;
@@ -215,15 +219,18 @@ Page({
    * 播放按压音频
    */
   playPressAudio: function (){
-    this.audioCtx.seek(3)
-    this.audioCtx.play()
+    // this.audioCtx.seek(5)
+    // this.audioCtx.play()
+    // console.log("播放")
+    // innerAudioContext.play()
   },
 
   /**
    * 停止按压音频
    */
   stopPressAudio: function (){
-    this.audioCtx.pause()
+    // this.audioCtx.pause()
+    // innerAudioContext.stop()
   },
 
   /**
@@ -232,7 +239,7 @@ Page({
   createTableRotateAnimation: function () {
     var rotateAnimation = wx.createAnimation({
       duration: this.pressDuration,
-      timingFunction: 'linear',
+      timingFunction: "linear",
     })
     rotateAnimation.rotateZ(this.deg + this.rotateDeg).step()
     // 输出动画
@@ -247,7 +254,7 @@ Page({
   createTableInterruptAnimation: function () {
     var interrupAnimation = wx.createAnimation({
       duration: 500,
-      timingFunction: 'ease-out',
+      timingFunction: "ease-out",
     })
     var degree = (this.rotateDeg / this.pressDuration) * Math.min(this.duration, this.pressDuration)
     this.deg += Math.round(degree)
@@ -271,7 +278,7 @@ Page({
 
     var stopAnimation = wx.createAnimation({
       duration: this.defaultStopDuration,
-      timingFunction: 'ease',
+      timingFunction: "ease",
     })
     stopAnimation.rotateZ(this.deg).step()
     // 输出动画
@@ -321,7 +328,7 @@ Page({
   createContentShowAnimation: function () {
     var animation = wx.createAnimation({
       duration: this.contentDuration,
-      timingFunction: 'linear',
+      timingFunction: "linear",
     })
     animation.opacity(1).translateY(0).scale(1).step()
     // 输出动画
@@ -351,7 +358,7 @@ Page({
   createSubContentShowAnimation: function () {
     var animation = wx.createAnimation({
       duration: this.subContentDuration,
-      timingFunction: 'linear',
+      timingFunction: "linear",
       delay: this.contentDuration + this.subContentDelay
     })
     animation.opacity(1).step()
@@ -369,7 +376,7 @@ Page({
     // console.log("exp透明度: " + this.expOpacity)
     var animation = wx.createAnimation({
       duration: 1,
-      timingFunction: 'step-start',
+      timingFunction: "step-start",
     })
     animation.opacity(0).step()
     // 输出动画
@@ -384,7 +391,7 @@ Page({
   createExpShowAnimation: function () {
     var animation = wx.createAnimation({
       duration: this.expDuration,
-      timingFunction: 'linear',
+      timingFunction: "linear",
     })
     this.expOpacity = this.expOpacity + 1
     // console.log((this.expOpacity) % 2)

@@ -34,6 +34,18 @@
 
 }
 
+.contentBg{
+  width: 700rpx;
+  height: 432rpx;
+  margin: auto;
+  border-radius: 16px;
+  background: #C4000C;
+  position: fixed;
+  top: 160rpx;
+  /*box-shadow:2px 2px 3px #000000; */
+  /*opacity: 1;*/
+}
+
 .exp{
   width: 100%;
   margin: auto;
