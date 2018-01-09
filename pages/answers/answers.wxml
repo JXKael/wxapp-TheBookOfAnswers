@@ -1,5 +1,6 @@
 <!--answers.wxml-->
-<view class="container">  
+<view class="container">
+  <audio src="{{audio_src}}" id="myAudio"></audio>
   <view class="background">
     <image class="backgroundImg" src="../../assets/bg1.jpg" mode="aspectFill"></image> 
   </view>
@@ -8,6 +9,9 @@
   </view>
   <view class="subContent" animation="{{subContentAnimation}}">
     <text class="subContentTxt">{{subContent}}</text>
+  </view>
+  <view class="exp" animation="{{expAnimation}}">
+    <text class="expTxt">{{exp}}</text>
   </view>
   <view class="table">
     <image id="table" class="tableImg" src="../../assets/table.png" bindtouchstart="touchStart" bindtouchend="touchEnd" animation="{{tableAnimation}}"></image>

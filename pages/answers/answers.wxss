@@ -13,17 +13,32 @@
 }
 
 .content{
+  width: 100%;
   color: white;
+  align-items: center;
   position: fixed;
-  font-size: 25px;
+  text-align: center;
+  font-size: 24px;
   top: 20%;
 }
 
 .subContent{
+  width: 100%;
   color: white;
   position: fixed;
+  text-align: center;
   font-size: 10px;
-  top: 30%;
+  top: 35%;
+
+}
+
+.exp{
+  width: 100%;
+  color: white;
+  position: fixed;
+  text-align: center;
+  font-size: 14px;
+  bottom: 35%;
 }
 
 .table{
