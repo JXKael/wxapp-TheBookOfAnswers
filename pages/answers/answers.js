@@ -107,13 +107,27 @@ Page({
       // 播放音频
       this.playPressAudio()
 
-      // 设置计时器，显示新内容，1.5s归位置
-      this.timeout = setTimeout(this.setNewContent.bind(this), this.pressDuration)
-      this.timeout_stop = setTimeout(this.createTableStopAnimation.bind(this), this.pressDuration)
-      this.timeout_contentShow = setTimeout(this.createContentShowAnimation.bind(this), this.pressDuration)
-      this.timeout_subContentShow = setTimeout(this.createSubContentShowAnimation.bind(this), this.pressDuration + this.contentDuration)
-      this.timeout_audioPress = setTimeout(this.stopPressAudio.bind(this), this.pressDuration)
+      // 设置计时器，按压结束后一系列动作
+      this.timeout_press_over = setTimeout(this.pressOver.bind(this), this.pressDuration)
     }
+  },
+  
+  /**
+   * 按压时间到结束的一系列动作
+   */
+  pressOver: function() {
+    // 设置文本新内容
+    this.setNewContent()
+    // 桌面停止动画
+    this.createTableStopAnimation()
+    // content显示动画
+    this.createContentShowAnimation()
+    // subContent显示动画
+    this.createSubContentShowAnimation()
+    // 停止播放按压音效
+    this.stopPressAudio()
+    // 播放停止音效
+    //
   },
 
   touchEnd: function (e) {
@@ -122,21 +136,14 @@ Page({
       this.touchEndTime = e.timeStamp
       // console.log("touch end at " + this.touchEndTime)
       this.duration = this.touchEndTime - this.touchStartTime
-      // 清除计时-----新内容
-      clearTimeout(this.timeout)
-      // 清除计时-----1.5s延时
-      clearTimeout(this.timeout_stop)
 
       // 停止播放音频
       this.stopPressAudio()
 
       if (this.duration < this.pressDuration) {
         // 清除计时-----content出现
-        clearTimeout(this.timeout_contentShow)
-        // 清除计时-----subContent出现
-        clearTimeout(this.timeout_subContentShow)
-        // 清除计时-----音频停止播放
-        clearTimeout(this.timeout_audioPress)
+        clearTimeout(this.timeout_press_over)
+
         this.createTableInterruptAnimation()
         this.inRotation = false
       }
@@ -179,7 +186,8 @@ Page({
     this.inRotation = false
     setTimeout(function(){
       this.inShow = false
-    }.bind(this), this.defaultStopDuration + this.contentDuration + this.subContentDelay)
+      console.log("好了")
+    }.bind(this), Math.max(this.defaultStopDuration, this.contentDuration) + this.subContentDelay + this.subContentDuration)
 
     var index = -1;
     var length = this.answerData.getAnswerLength()
@@ -256,15 +264,11 @@ Page({
    */
   createTableStopAnimation: function () {
     this.deg = this.deg + this.rotateDeg
-    // console.log("当前角度: " + this.deg)
-    // console.log("除以360: " + this.deg / 360)
-    // console.log("取整: " + Math.floor(this.deg / 360))
-    // console.log("乘回360: " + Math.floor(this.deg / 360) * 360)
     // 必须加一个temp否则会出错，这TM什么编译器啊！
     var temp = Math.floor(this.deg / 360) * 360
     this.deg = temp + 360
-    // console.log("再加360: " + (temp + 360))
     // console.log("停止: " + this.deg)
+
     var stopAnimation = wx.createAnimation({
       duration: this.defaultStopDuration,
       timingFunction: 'ease',
@@ -297,6 +301,7 @@ Page({
 
   /**
    * content内容动画初始设置
+   * 瞬间设置为透明度0，下移40，缩小0.8
    */
   createContentStartAnimation: function() {
     var animation = wx.createAnimation({
@@ -347,7 +352,7 @@ Page({
     var animation = wx.createAnimation({
       duration: this.subContentDuration,
       timingFunction: 'linear',
-      delay: this.subContentDelay
+      delay: this.contentDuration + this.subContentDelay
     })
     animation.opacity(1).step()
     // 输出动画

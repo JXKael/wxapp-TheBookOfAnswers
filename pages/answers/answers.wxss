@@ -41,16 +41,20 @@
   position: fixed;
   text-align: center;
   font-size: 14px;
-  bottom: 400rpx;
+  bottom: 420rpx;
 }
 
 .table{
+  width: 100%;
+  margin: auto;
   display: flex;
   position: fixed;
-  bottom: 50rpx;
+  align-items: center;
+  bottom: 80rpx;
 }
 
 .tableImg{
   width: 128px;
   height: 128px;
+  margin: auto;
 }
