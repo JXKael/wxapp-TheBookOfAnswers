@@ -29,7 +29,7 @@ Page({
   touchEndTime: 0,
   duration: 0,
   // 动画
-  pressDuration: 6000,
+  pressDuration: 4500,
   defaultStopDuration: 1500,
   deg: 0,
   rotateDeg: 180,
@@ -219,8 +219,8 @@ Page({
    * 播放按压音频
    */
   playPressAudio: function (){
-    // this.audioCtx.seek(5)
-    // this.audioCtx.play()
+    this.audioCtx.seek(5)
+    this.audioCtx.play()
     // console.log("播放")
     // innerAudioContext.play()
   },
@@ -229,7 +229,7 @@ Page({
    * 停止按压音频
    */
   stopPressAudio: function (){
-    // this.audioCtx.pause()
+    this.audioCtx.pause()
     // innerAudioContext.stop()
   },
 
