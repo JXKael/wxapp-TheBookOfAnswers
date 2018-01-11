@@ -16,7 +16,7 @@ function answerData() {
     { content: "七月流火", subContent: "取自：《诗经·七月》", exp: "保重身体" },
     { content: "维常之花", subContent: "改自：《诗经·采薇》", exp: "好兄弟" },
 
-    { content: "毋自辱", subContent: "取自：《论语·颜渊》", exp: "不卑不亢" },
+    { content: "毋自辱", subContent: "取自：《论语·颜渊》", exp: "别自讨没趣" },
     { content: "知之为知之", subContent: "取自：《论语·为政》", exp: "不必刻意隐瞒" },
     { content: "欲速则不达", subContent: "取自：《论语·子路》", exp: "没事，慢慢来" },
     { content: "思无邪", subContent: "取自：《论语·为政》", exp: "这是一个肯定" },
