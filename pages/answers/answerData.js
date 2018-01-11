@@ -83,7 +83,7 @@ function answerData() {
     { content: "当断不断，反受其乱", subContent: "改自：《史记·齐悼惠王世家》", exp: "斩乱麻" },
     { content: "岂不谬哉", subContent: "取自：《史记·项羽本纪》", exp: "荒唐" },
     { content: "大风起兮云飞扬", subContent: "取自：《史记·高祖本纪》", exp: "风云起" },
-    { content: "戏言", subContent: "取自：《史记·晋世家》", exp: "少开点笑话" },
+    { content: "无戏言", subContent: "取自：《史记·晋世家》", exp: "少开点笑话" },
     { content: "无相忘", subContent: "取自：《史记·陈涉世家》", exp: "别忘得太快" },
 
     { content: "何陋之有", subContent: "取自：《陋室铭》", exp: "心安理得" },
