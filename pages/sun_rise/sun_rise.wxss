@@ -1,0 +1,242 @@
+/* answers.wxss */
+.background{
+  width: 100%;
+  height: 100%;
+  z-index: -6;
+  position: fixed;
+}
+
+#background_img{
+  width: 100%;
+  height: 100%;
+}
+
+.sun{
+  width: 100%;
+  height: auto;
+  margin: auto;
+  z-index: -5;
+  display: flex;
+  position: fixed;
+  bottom: 0rpx;
+  align-items: flex-end;
+}
+
+#sun_img_halo_1{
+  width: 100%;
+  max-height: 723rpx;
+  margin: auto;
+}
+
+#sun_img_halo_2{
+  width: 100%;
+  max-width: 229rpx;
+  max-height: 229rpx;
+  margin: auto;
+  position: fixed;
+  left: 233rpx;
+  bottom: 187rpx;
+}
+
+#sun_img_halo_3{
+  width: 100%;
+  max-width: 180rpx;
+  max-height: 180rpx;
+  margin: auto;
+  position: fixed;
+  left: 257rpx;
+  bottom: 212rpx;
+}
+
+#sun{
+  width: 100%;
+  max-width: 135rpx;
+  max-height: 135rpx;
+  margin: auto;
+  position: fixed;
+  left: 278rpx;
+  bottom: 236rpx;
+}
+
+.cloud{
+  position: fixed;
+  z-index: -4;
+}
+
+#cloud_img_1{
+  position: fixed;
+  max-width: 125rpx;
+  max-height: 70rpx;
+  top: 153rpx;
+  right: 32rpx;
+}
+
+#cloud_img_2{
+  position: fixed;
+  max-width: 125rpx;
+  max-height: 70rpx;
+  top: 285rpx;
+  left: 32rpx;
+}
+
+#cloud_img_3{
+  position: fixed;
+  max-width: 103rpx;
+  max-height: 50rpx;
+  right: 96rpx;
+  bottom: 422rpx;
+}
+
+#cloud_img_4{
+  position: fixed;
+  max-width: 75rpx;
+  max-height: 30rpx;
+  left: 52rpx;
+  bottom: 344rpx;
+}
+
+.mountain{
+  width: 100%;
+  height: auto;
+  margin: auto;
+  z-index: -3;
+  display: flex;
+  position: fixed;
+  bottom: 0rpx;
+  align-items: flex-end;
+}
+
+#mountain_img{
+  width: 100%;
+  max-height: 422rpx;
+  margin: auto;
+}
+
+.man{
+  position: fixed;
+  z-index: -2;
+}
+
+#man_img{
+  max-width: 13rpx;
+  max-height: 31rpx;
+  position: fixed;
+  left: 491rpx;
+  bottom: 150rpx;
+}
+
+#man_shadow{
+  max-width: 37rpx;
+  max-height: 26rpx;
+  position: fixed;
+  left: 489rpx;
+  bottom: 133rpx;
+}
+
+.bird{
+  position: fixed;
+  z-index: -2;
+}
+
+#bird_img_1{
+  max-width: 25rpx;
+  max-height: 13rpx;
+  position: fixed;
+  right: 41rpx;
+  bottom: 193rpx;
+}
+
+#bird_img_2{
+  max-width: 20rpx;
+  max-height: 10rpx;
+  position: fixed;
+  left: 241rpx;
+  bottom: 93rpx;
+}
+
+#bird_img_3{
+  max-width: 13rpx;
+  max-height: 6rpx;
+  position: fixed;
+  left: 196rpx;
+  bottom: 79rpx;
+}
+
+.content_1{
+  width: 100%;
+  z-index: -1;
+  margin: auto;
+  color: white;
+  align-items: center;
+  position: fixed;
+  text-align: center;
+  font-size: 48rpx;
+  top: 223rpx;
+}
+
+.content_2{
+  width: 100%;
+  margin: auto;
+  color: white;
+  position: fixed;
+  text-align: center;
+  font-size: 20rpx;
+  top: 355rpx;
+}
+
+.contentBg{
+  width: 700rpx;
+  height: 432rpx;
+  margin: auto;
+  border-radius: 16px;
+  background: #C4000C;
+  position: fixed;
+  top: 160rpx;
+  /*box-shadow:2px 2px 3px #000000; */
+  /*opacity: 1;*/
+}
+
+.exp{
+  width: 100%;
+  margin: auto;
+  color: white;
+  position: fixed;
+  text-align: center;
+  font-size: 14px;
+  bottom: 420rpx;
+}
+
+.tutorial{
+  width: 100%;
+  height: auto;
+  z-index: -1;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  position: fixed;
+  top: 120rpx;
+}
+
+.tutorial_txt_1{
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  font-size: 40rpx;
+}
+
+.tutorial_txt_2{
+  width: 100%;
+  margin-top: 80rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+
+.tutorial_txt_3{
+  width: 100%;
+  margin-top: 80rpx;
+  text-align: center;
+  font-size: 40rpx;
+}

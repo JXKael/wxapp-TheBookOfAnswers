@@ -1,13 +1,14 @@
 {
-  "pages":[
+  "pages": [
+    "pages/sun_rise/sun_rise",
     "pages/answers/answers",
     "pages/index/index",
     "pages/logs/logs"
   ],
-  "window":{
+  "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#e60012",
+    "navigationBarBackgroundColor": "#e30b52",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle": "white"
   }
 }

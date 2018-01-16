@@ -1,0 +1,37 @@
+<!--sun_rise.wxml-->
+<view class="container">
+  <view class="background">
+    <image id="background_img" src="../../assets/sun_rise/bg.png" mode="scaleToFill"></image> 
+  </view>
+  <view class="sun">
+    <image id="sun_img_halo_1" src="../../assets/sun_rise/sun_halo_1.png" mode="widthFix"></image>
+    <image id="sun_img_halo_2" src="../../assets/sun_rise/sun_halo_2.png" mode="aspectFill"></image>
+    <image id="sun_img_halo_3" src="../../assets/sun_rise/sun_halo_3.png" mode="aspectFill"></image>
+    <image id="sun" src="../../assets/sun_rise/sun.png" mode="aspectFill"></image>
+  </view>
+  <view class="cloud">
+    <image id="cloud_img_1" src="../../assets/sun_rise/cloud_1.png" mode="aspectFit"></image>
+    <image id="cloud_img_2" src="../../assets/sun_rise/cloud_2.png" mode="aspectFit"></image>
+    <image id="cloud_img_3" src="../../assets/sun_rise/cloud_3.png" mode="aspectFit"></image>
+    <image id="cloud_img_4" src="../../assets/sun_rise/cloud_4.png" mode="aspectFit"></image>
+  </view>
+  <view class="mountain">
+    <image id="mountain_img" src="../../assets/sun_rise/mountain.png" mode="widthFix"></image>
+  </view>
+  <view class="man">
+    <image id="man_img" src="../../assets/sun_rise/man.png" mode="aspectFit"></image>
+    <image id="man_shadow" src="../../assets/sun_rise/man_shadow.png" mode="aspectFit"></image>
+  </view>
+  <view class="bird">
+    <image id="bird_img_1" src="../../assets/sun_rise/bird_1.png" mode="aspectFit"></image>
+    <image id="bird_img_2" src="../../assets/sun_rise/bird_2.png" mode="aspectFit"></image>
+    <image id="bird_img_3" src="../../assets/sun_rise/bird_3.png" mode="aspectFit"></image>
+  </view>
+  <text class="content_1">{{content}}</text>
+  <text class="content_2">{{subContent}}</text>
+  <view class="tutorial" wx:if="{{(state == 'toturial')}}">
+    <text class="tutorial_txt_1">{{tutorial_txt[0]}}</text>
+    <text class="tutorial_txt_2">{{tutorial_txt[1]}}</text>
+    <text class="tutorial_txt_3">{{tutorial_txt[2]}}</text>
+  </view>
+</view>
