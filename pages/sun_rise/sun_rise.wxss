@@ -207,7 +207,7 @@
 }
 
 .tutorial{
-  width: 100%;
+  width: auto;
   height: auto;
   z-index: -1;
   margin: auto;
