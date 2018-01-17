@@ -5,6 +5,12 @@ function anim_data() {
   this.tutorialDelay = 400
   /* 第一个延迟参数, delay / para */
   this.tutorialPara = 1
+  /* 圆圈淡入时间 */
+  this.circleFadeIn = 1000
+  /* 圆圈扩大时间 */
+  this.circleLineDuration = 800
+  /* 圆圈扩大间隔 */
+  this.circleLineInterval = 3500
 
   /* 长按时间 */
   this.pressDuration = 1500
@@ -18,6 +24,9 @@ function anim_data() {
   this.subContentDuration =  1000
   /* B文本出现时间 */
   this.expDuration = 1000
+
+  /* 上方云朵飘动时间 */
+  this.cloudFloat = 5000
 }
 
 anim_data.prototype = {

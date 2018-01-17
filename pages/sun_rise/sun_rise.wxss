@@ -220,6 +220,7 @@
   vertical-align: middle;
   font-size: 27rpx;
   color: #9f1b55;
+  opacity: 1;
 }
 
 .tutorial{
@@ -234,6 +235,7 @@
   color: white;
   position: fixed;
   top: 120rpx;
+  pointer-events: none;
 }
 
 .tutorial_txt_1{
@@ -256,5 +258,55 @@
   margin-top: 80rpx;
   text-align: center;
   font-size: 40rpx;
+}
+
+.circle-container{
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  bottom: 100rpx;
+}
+
+.circle{
+  width: 80rpx;
+  height: 80rpx;
+  margin: auto;
+  border: 10rpx solid rgba(255,255,255,0.7);
+  border-radius: 50%;
+  box-shadow: 0 0 20rpx 0 rgba(0,0,0,.2);
+}
+
+.circle-line-container{
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  bottom: 91rpx;
+}
+
+.circle-line{
+  width: 114rpx;
+  height: 114rpx;
+  margin: auto;
+  border: 4rpx solid white;
+  border-radius: 50%;
+  box-shadow: 0 0 20rpx 0 rgba(0,0,0,.2);
+}
+
+.thanks{
+  width: 100%;
+  position: fixed;
+  bottom: 10rpx;
+  text-align: right;
+}
+
+.thanks_txt{
+  color: #9D3170;
+  margin-right: 16rpx;
+  font-size: 16rpx;
+  text-shadow: 2rpx 2rpx rgba(0,0,0,.7);
 }
 
