@@ -1,5 +1,5 @@
 function anim_sun_rise() {
-  this.initPos = 30;
+  this.initPos = 30
 }
 
 anim_sun_rise.prototype = {
@@ -34,7 +34,7 @@ anim_sun_rise.prototype = {
   interrupt: function (time) {
     this.animation = wx.createAnimation({
       duration: time,
-      timingFunction: "ease-out",
+      timingFunction: "ease-in",
     })
     this.animation.translateY(this.initPos).step()
     return this.animation

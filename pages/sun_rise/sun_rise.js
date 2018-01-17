@@ -3,6 +3,7 @@
 var answerData = require("../answers/answerData.js")
 var anim_data = require("./anim_data.js")
 var anim_sun_rise = require("./anim_sun_rise.js")
+var anim_tutorial = require("./anim_tutorial.js")
 
 var State = {
   toturial: "toturial",
@@ -18,6 +19,7 @@ Page({
    */
   data: {
     state: "",
+    isShowTutorialTxt: true,
     content: "",
     subContent: "",
     exp: "",
@@ -26,7 +28,15 @@ Page({
     subContentAnimation: "",
     expAnimation: "",
     tutorial_txt: "",
-    _anim_sun_rise: ""
+    /* 动画 */
+    _anim_sun_rise: "",
+    _anim_tutorial_txt_1: "",
+    _anim_tutorial_txt_2: "",
+    _anim_tutorial_txt_3: "",
+    _anim_cloud_1: "",
+    _anim_cloud_2: "",
+    _anim_cloud_3: "",
+    _anim_cloud_4: "",
   },
 
   touchStartTime: 0,
@@ -40,6 +50,7 @@ Page({
     this.answerData = new answerData()
     this.anim_data = new anim_data()
     this.anim_sun_rise = new anim_sun_rise()
+    this.anim_tutorial = new anim_tutorial()
   },
 
   /**
@@ -47,13 +58,15 @@ Page({
    */
   onReady: function () {
     // 设置content默认内容
-    this.setDefaultContent()
+    this.initial()
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {},
+  onShow: function () {
+
+  },
 
   /**
    * 生命周期函数--监听页面隐藏
@@ -83,25 +96,47 @@ Page({
   /**
    * 设置默认文本、初始状态
    */
-  setDefaultContent: function () {
+  initial: function () {
     this.setData({
       content: this.answerData.getDefaultContent(),
       subContent: this.answerData.getDefaultSubContent(),
       tutorial_txt: this.answerData.getTutorialTxt(),
       state: State.toturial,
-      _anim_sun_rise: this.anim_sun_rise.initial().export()
+      _anim_sun_rise: this.anim_sun_rise.initial().export(),
+      _anim_tutorial_txt_1: this.anim_tutorial.initialTxt().export(),
+      _anim_tutorial_txt_2: this.anim_tutorial.initialTxt().export(),
+      _anim_tutorial_txt_3: this.anim_tutorial.initialTxt().export(),
+      _anim_cloud_1: this.anim_tutorial.initialCloud(true).export(),
+      _anim_cloud_2: this.anim_tutorial.initialCloud(false).export(),
     })
+
+    setTimeout(function () {
+      this.setData({
+        _anim_tutorial_txt_1: this.anim_tutorial.moveDown(this.anim_data.tutorialTime, 0).export(),
+        _anim_tutorial_txt_2: this.anim_tutorial.moveDown(this.anim_data.tutorialTime,this.anim_data.tutorialDelay).export(),
+        _anim_tutorial_txt_3: this.anim_tutorial.moveDown(this.anim_data.tutorialTime, this.anim_data.tutorialDelay * 2).export(),
+        _anim_cloud_1: this.anim_tutorial.moveIn(this.anim_data.tutorialDuration(), 0).export(),
+        _anim_cloud_2: this.anim_tutorial.moveIn(this.anim_data.tutorialDuration(), 0).export(),
+      })
+    }.bind(this), this.anim_data.tutorialDelay / this.anim_data.tutorialPara)
+
+    setTimeout(function () {
+      this.setData({
+        state: State.waiting
+      })
+    }.bind(this), this.anim_data.tutorialDuration())
   },
 
   longPress: function(e) {
-    if (this.data.state == State.toturial || this.data.state == State.waiting)
+    if (this.data.state == State.waiting)
     {
       console.log("long tap start")
-      this.data.state = State.pressing
       this.touchStartTime = e.timeStamp
 
       var time = this.anim_data.pressDuration + this.anim_data.afterPress
       this.setData({
+        state: State.pressing,
+        isShowTutorialTxt: false,
         _anim_sun_rise: this.anim_sun_rise.moveUp(time).export()
       })
     }
@@ -113,16 +148,12 @@ Page({
       this.touchEndTime = e.timeStamp
       this.duration = this.touchEndTime - this.touchStartTime
       console.log(this.duration)
-      // 停止播放音频
-      // this.stopPressAudio()
 
       if (this.duration < this.anim_data.pressDuration) {
-        // 清除计时-----content出现
-        // clearTimeout(this.timeout_press_over)
         this.setData({
+          state: State.waiting,
           _anim_sun_rise: this.anim_sun_rise.interrupt(this.duration).export()
         })
-        this.data.state = State.waiting
       }
     }
   },

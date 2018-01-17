@@ -10,10 +10,10 @@
     <image id="sun" src="../../assets/sun_rise/sun.png" mode="aspectFill"></image>
   </view>
   <view class="cloud">
-    <image id="cloud_img_1" src="../../assets/sun_rise/cloud_1.png" mode="aspectFit"></image>
-    <image id="cloud_img_2" src="../../assets/sun_rise/cloud_2.png" mode="aspectFit"></image>
-    <image id="cloud_img_3" src="../../assets/sun_rise/cloud_3.png" mode="aspectFit"></image>
-    <image id="cloud_img_4" src="../../assets/sun_rise/cloud_4.png" mode="aspectFit"></image>
+    <image id="cloud_img_1" src="../../assets/sun_rise/cloud_1.png" mode="aspectFit" animation="{{_anim_cloud_1}}"></image>
+    <image id="cloud_img_2" src="../../assets/sun_rise/cloud_2.png" mode="aspectFit" animation="{{_anim_cloud_2}}"></image>
+    <image id="cloud_img_3" src="../../assets/sun_rise/cloud_3.png" mode="aspectFit" animation="{{_anim_cloud_3}}"></image>
+    <image id="cloud_img_4" src="../../assets/sun_rise/cloud_4.png" mode="aspectFit" animation="{{_anim_cloud_4}}"></image>
   </view>
   <view class="mountain" bindlongpress="longPress" bindtouchend="touchEnd">
     <image id="mountain_img" src="../../assets/sun_rise/mountain.png" mode="widthFix"></image>
@@ -29,9 +29,9 @@
   </view>
   <text class="content_1">{{content}}</text>
   <text class="content_2">{{subContent}}</text>
-  <view class="tutorial" wx:if="{{(state == 'toturial')}}">
-    <text class="tutorial_txt_1">{{tutorial_txt[0]}}</text>
-    <text class="tutorial_txt_2">{{tutorial_txt[1]}}</text>
-    <text class="tutorial_txt_3">{{tutorial_txt[2]}}</text>
+  <view class="tutorial" wx:if="{{isShowTutorialTxt}}">
+    <text class="tutorial_txt_1" animation="{{_anim_tutorial_txt_1}}">{{tutorial_txt[0]}}</text>
+    <text class="tutorial_txt_2" animation="{{_anim_tutorial_txt_2}}">{{tutorial_txt[1]}}</text>
+    <text class="tutorial_txt_3" animation="{{_anim_tutorial_txt_3}}">{{tutorial_txt[2]}}</text>
   </view>
 </view>
