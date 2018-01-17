@@ -7,8 +7,8 @@ anim_cloud_move.prototype = {
    * 
    */
   move: function (time, delay) {
-    var rand = Math.random()
-    var offset = rand > 0.5 ? 8 : -8
+    var offset = Math.random() * 3 + 5
+    offset = Math.random() > 0.5 ? offset : -offset
     this.animation = wx.createAnimation({
       duration: time,
       timingFunction: "ease",

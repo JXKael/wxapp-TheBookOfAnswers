@@ -158,12 +158,12 @@ Page({
         this.setData({
           _anim_cloud_1: this.anim_cloud_move.move(this.anim_data.cloudFloat, 0).export(),
         })
-      }.bind(this), this.anim_data.cloudFloat * 3.2)
+      }.bind(this), this.anim_data.cloudFloat * (3.2 + Math.random()))
       setInterval(function () {
         this.setData({
           _anim_cloud_2: this.anim_cloud_move.move(this.anim_data.cloudFloat, 0).export(),
         })
-      }.bind(this), this.anim_data.cloudFloat * 3.5)
+      }.bind(this), this.anim_data.cloudFloat * (3.2 + Math.random()))
     }.bind(this), this.anim_data.tutorialDuration())
   },
 
