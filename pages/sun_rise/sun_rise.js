@@ -6,6 +6,8 @@ var anim_sun_rise = require("./anim_sun_rise.js")
 var anim_tutorial = require("./anim_tutorial.js")
 var anim_content = require("./anim_content.js")
 var anim_sun_cloud = require("./anim_sun_cloud.js")
+var anim_exp = require("./anim_exp.js")
+
 
 var State = {
   toturial: "toturial",
@@ -25,10 +27,6 @@ Page({
     subContent: "",
     exp: "",
     tutorial_txt: "",
-
-    contentAnimation: "",
-    subContentAnimation: "",
-    expAnimation: "",
     /* 动画 */
     _anim_sun_rise: "",
     _anim_tutorial_txt_1: "",
@@ -40,6 +38,7 @@ Page({
     _anim_cloud_4: "",
     _anim_content: "",
     _anim_sub_content: "",
+    _anim_exp: "",
   },
 
   touchStartTime: 0,
@@ -57,6 +56,7 @@ Page({
     this.anim_tutorial = new anim_tutorial()
     this.anim_content = new anim_content()
     this.anim_sun_cloud = new anim_sun_cloud()
+    this.anim_exp = new anim_exp()
   },
 
   /**
@@ -70,9 +70,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
-  },
+  onShow: function () {},
 
   /**
    * 生命周期函数--监听页面隐藏
@@ -106,6 +104,7 @@ Page({
     this.setData({
       content: this.answer_data.getDefaultContent(),
       subContent: this.answer_data.getDefaultSubContent(),
+      exp: this.answer_data.getDefaultExp(),
       tutorial_txt: this.answer_data.getTutorialTxt(),
       state: State.toturial,
       _anim_sun_rise: this.anim_sun_rise.initial().export(),
@@ -116,6 +115,7 @@ Page({
       _anim_cloud_2: this.anim_tutorial.initialCloud(false).export(),
       _anim_cloud_3: this.anim_sun_cloud.initial(true).export(),
       _anim_cloud_4: this.anim_sun_cloud.initial(false).export(),
+      _anim_exp: this.anim_exp.initial().export()
     })
 
     setTimeout(function () {
@@ -144,13 +144,16 @@ Page({
       this.setData({
         content: "",
         subContent: "",
+        exp: "",
         state: State.pressing,
         isShowTutorialTxt: false,
         _anim_sun_rise: this.anim_sun_rise.initial().export(),
         _anim_cloud_3: this.anim_sun_cloud.initial(true).export(),
         _anim_cloud_4: this.anim_sun_cloud.initial(false).export(),
+
         _anim_content: this.anim_content.initialTxt().export(),
         _anim_sub_content: this.anim_content.initialSubTxt().export(),
+        _anim_exp: this.anim_exp.initial().export(),
       })
 
       setTimeout(function () {
@@ -195,20 +198,22 @@ Page({
    */
   pressSuccess: function () {
     var answer = this.getRandomAnswer()
+    var time = this.anim_data.contentDuration + this.anim_data.contentInteral + this.anim_data.subContentDuration
+
     this.setData({
       content: answer.content,
       subContent: answer.subContent,
+      exp: answer.exp,
       _anim_content: this.anim_content.contentShow(this.anim_data.contentDuration, 0).export(),
-      _anim_sub_content: this.anim_content.subContentShow(this.anim_data.subContentDuration, this.anim_data.contentInteral + this.anim_data.contentDuration).export()
+      _anim_sub_content: this.anim_content.subContentShow(this.anim_data.subContentDuration, this.anim_data.contentInteral + this.anim_data.contentDuration).export(),
+      _anim_exp: this.anim_exp.expShow(this.anim_data.expDuration, time).export(),
     })
-
-    var time = this.anim_data.contentDuration + this.anim_data.contentInteral + this.anim_data.subContentDuration
 
     setTimeout(function () {
       this.setData({
         state: State.waiting
       })
-    }.bind(this), time)
+    }.bind(this), time + this.anim_data.expDuration)
   },
 
   getRandomAnswer: function () {
@@ -225,7 +230,6 @@ Page({
       index = Math.floor(Math.random() * length)
     }
     this.lastIndex = index
-    console.log(index)
     var answer = this.answer_data.getAnswerByIndex(index)
     return answer
   }

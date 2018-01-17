@@ -184,26 +184,42 @@
   top: 455rpx;
 }
 
-.contentBg{
-  width: 700rpx;
-  height: 432rpx;
-  margin: auto;
-  border-radius: 16px;
-  background: #C4000C;
+.exp{
   position: fixed;
-  top: 160rpx;
-  /*box-shadow:2px 2px 3px #000000; */
-  /*opacity: 1;*/
+  height: 100rpx;
+  right: 105rpx;/*让对话框靠右，自适应的时候宽度向左扩张*/
+  bottom: 180rpx;
 }
 
-.exp{
-  width: 100%;
+.c-dialog{
+  display: flex;
+  top: 0;
+  min-height: 64rpx;
+  min-width: 200rpx;
+  color: #E20B4F;
+  background: rgba(255,255,255,.6);
+  border-radius: 10rpx;
+  padding: 0 20rpx;
+  justify-content: center;
+  box-shadow: 0 0 20rpx 0 rgba(0,0,0,.2);
+}
+.c-dialog:after{
+  content: "";
+  position: absolute;
+  top: 64rpx;
+  right: 130rpx;
+  width: 0;
+  height: 0;
+  border-top: 20rpx solid rgba(255,255,255,.6);
+  border-right: 20rpx solid transparent;
+}
+
+#exp_txt{
+  padding: 10rpx 20rpx;
   margin: auto;
-  color: white;
-  position: fixed;
-  text-align: center;
-  font-size: 14px;
-  bottom: 420rpx;
+  vertical-align: middle;
+  font-size: 27rpx;
+  color: #9f1b55;
 }
 
 .tutorial{
@@ -232,6 +248,7 @@
   margin-top: 80rpx;
   text-align: center;
   font-size: 28rpx;
+  line-height: 60rpx;
 }
 
 .tutorial_txt_3{
@@ -240,3 +257,4 @@
   text-align: center;
   font-size: 40rpx;
 }
+

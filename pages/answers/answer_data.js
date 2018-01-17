@@ -189,6 +189,10 @@ answer_data.prototype={
     return this.defaultSubContent
   },
 
+  getDefaultExp: function () {
+    return ""
+  },
+
   getTutorialTxt: function () {
     return this.tutorialTxt
   },

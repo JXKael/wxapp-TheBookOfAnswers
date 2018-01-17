@@ -1,5 +1,5 @@
 function anim_tutorial() {
-  this.initTxtPos = 30
+  this.initTxtPos = -25
   this.initCloudPos = -60
 }
 

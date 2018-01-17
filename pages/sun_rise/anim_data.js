@@ -12,16 +12,18 @@ function anim_data() {
   this.afterPress = 500
   /* A文本出现时间 */
   this.contentDuration = 1000
-  /* A文本与B文本间隔 */
+  /* 出处文本间隔 */
   this.contentInteral = 500
-  /* B文本出现时间 */
+  /* 出处文本出现时间 */
   this.subContentDuration =  1000
+  /* B文本出现时间 */
+  this.expDuration = 1000
 }
 
 anim_data.prototype = {
   tutorialDuration: function() {
     return this.tutorialDelay / this.tutorialPara + this.tutorialTime + 2 * this.tutorialDelay
-  }
+  },
 }
 
 module.exports = anim_data

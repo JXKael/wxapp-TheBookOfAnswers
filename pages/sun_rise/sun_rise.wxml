@@ -29,9 +29,15 @@
   </view>
   <text class="content_1" animation="{{_anim_content}}">{{content}}</text>
   <text class="content_2" animation="{{_anim_sub_content}}">{{subContent}}</text>
+  <view class="exp" animation="{{_anim_exp}}">
+		<view class="c-dialog">
+      <text id="exp_txt">{{exp}}</text>
+    </view>
+	</view>
   <view class="tutorial" wx:if="{{isShowTutorialTxt}}">
     <text class="tutorial_txt_1" animation="{{_anim_tutorial_txt_1}}">{{tutorial_txt[0]}}</text>
     <text class="tutorial_txt_2" animation="{{_anim_tutorial_txt_2}}">{{tutorial_txt[1]}}</text>
     <text class="tutorial_txt_3" animation="{{_anim_tutorial_txt_3}}">{{tutorial_txt[2]}}</text>
   </view>
+  
 </view>
