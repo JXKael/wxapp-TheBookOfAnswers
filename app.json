@@ -1,9 +1,7 @@
 {
   "pages": [
     "pages/sun_rise/sun_rise",
-    "pages/answers/answers",
-    "pages/index/index",
-    "pages/logs/logs"
+    "pages/answers/answers"
   ],
   "window": {
     "backgroundTextStyle": "light",

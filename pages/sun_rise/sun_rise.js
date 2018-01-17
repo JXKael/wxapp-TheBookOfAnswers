@@ -183,9 +183,6 @@ Page({
         _anim_exp: this.anim_exp.exp(this.anim_data.expDuration, this.isExpShow ? 0 : 1).export()
       })
       this.isExpShow = !this.isExpShow
-      console.log("可以显示")
-    }else{
-      console.log("不可以显示")
     }
   },
 
