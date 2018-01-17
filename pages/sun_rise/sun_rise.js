@@ -194,9 +194,10 @@ Page({
    * 按压时间到结束的一系列动作
    */
   pressSuccess: function () {
+    var answer = this.getRandomAnswer()
     this.setData({
-      content: this.getRandomAnswer().content,
-      subContent: this.getRandomAnswer().subContent,
+      content: answer.content,
+      subContent: answer.subContent,
       _anim_content: this.anim_content.contentShow(this.anim_data.contentDuration, 0).export(),
       _anim_sub_content: this.anim_content.subContentShow(this.anim_data.subContentDuration, this.anim_data.contentInteral + this.anim_data.contentDuration).export()
     })
@@ -224,7 +225,7 @@ Page({
       index = Math.floor(Math.random() * length)
     }
     this.lastIndex = index
-
+    console.log(index)
     var answer = this.answer_data.getAnswerByIndex(index)
     return answer
   }
