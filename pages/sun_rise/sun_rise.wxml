@@ -3,7 +3,7 @@
   <view class="background">
     <image id="background_img" src="../../assets/sun_rise/bg.png" mode="scaleToFill"></image> 
   </view>
-  <view class="sun">
+  <view class="sun" animation="{{_anim_sun_rise}}">
     <image id="sun_img_halo_1" src="../../assets/sun_rise/sun_halo_1.png" mode="widthFix"></image>
     <image id="sun_img_halo_2" src="../../assets/sun_rise/sun_halo_2.png" mode="aspectFill"></image>
     <image id="sun_img_halo_3" src="../../assets/sun_rise/sun_halo_3.png" mode="aspectFill"></image>
@@ -15,7 +15,7 @@
     <image id="cloud_img_3" src="../../assets/sun_rise/cloud_3.png" mode="aspectFit"></image>
     <image id="cloud_img_4" src="../../assets/sun_rise/cloud_4.png" mode="aspectFit"></image>
   </view>
-  <view class="mountain">
+  <view class="mountain" bindlongpress="longPress" bindtouchend="touchEnd">
     <image id="mountain_img" src="../../assets/sun_rise/mountain.png" mode="widthFix"></image>
   </view>
   <view class="man">
