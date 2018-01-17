@@ -15,7 +15,7 @@ function anim_data() {
   /* A文本与B文本间隔 */
   this.contentInteral = 500
   /* B文本出现时间 */
-  this.subContentDuration =  1500
+  this.subContentDuration =  1000
 }
 
 anim_data.prototype = {

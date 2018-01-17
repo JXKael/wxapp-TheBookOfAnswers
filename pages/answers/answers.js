@@ -3,7 +3,7 @@
 //获取应用实例
 const app = getApp()
 
-var answerData = require("./answerData.js")
+var answerData = require("./answer_data.js")
 
 const innerAudioContext = wx.createInnerAudioContext()
 

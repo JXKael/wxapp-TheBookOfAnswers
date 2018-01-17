@@ -67,7 +67,7 @@
   position: fixed;
   max-width: 125rpx;
   max-height: 70rpx;
-  top: 153rpx;
+  top: 143rpx;
   right: 32rpx;
 }
 
@@ -75,7 +75,7 @@
   position: fixed;
   max-width: 125rpx;
   max-height: 70rpx;
-  top: 285rpx;
+  top: 307rpx;
   left: 32rpx;
 }
 
@@ -170,7 +170,7 @@
   align-items: center;
   position: fixed;
   text-align: center;
-  font-size: 48rpx;
+  font-size: 56rpx;
   top: 223rpx;
 }
 
@@ -180,8 +180,8 @@
   color: white;
   position: fixed;
   text-align: center;
-  font-size: 20rpx;
-  top: 355rpx;
+  font-size: 27rpx;
+  top: 455rpx;
 }
 
 .contentBg{

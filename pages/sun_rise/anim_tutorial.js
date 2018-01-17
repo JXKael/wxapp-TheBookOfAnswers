@@ -13,7 +13,7 @@ anim_tutorial.prototype = {
       duration: 1,
       timingFunction: "step-start",
     })
-    this.animation.translateY(this.initTxtPos).opacity(0).step()
+    this.animation.translateY(this.initTxtPos).opacity(0).scale(0.8).step()
     return this.animation
   },
 
@@ -25,7 +25,7 @@ anim_tutorial.prototype = {
       duration: 1,
       timingFunction: "step-start",
     })
-    this.animation.translateX(isRight ? this.initCloudPos : -this.initCloudPos).opacity(0).step()
+    this.animation.translateX(isRight ? this.initCloudPos : -this.initCloudPos).opacity(0).scale(0.8).step()
     return this.animation
   },
 
@@ -38,12 +38,12 @@ anim_tutorial.prototype = {
       timingFunction: "ease-out",
       delay: delay
     })
-    this.animation.translateY(0).opacity(1).step()
+    this.animation.translateY(0).opacity(1).scale(1).step()
     return this.animation
   },
 
   /**
-   * 右侧云朵右移淡入
+   * 云朵淡入
    */
   moveIn: function (time, delay) {
     this.animation = wx.createAnimation({
@@ -51,7 +51,7 @@ anim_tutorial.prototype = {
       timingFunction: "ease-out",
       delay: delay
     })
-    this.animation.translateX(0).opacity(1).step()
+    this.animation.translateX(0).opacity(1).scale(1).step()
     return this.animation
   },
 }

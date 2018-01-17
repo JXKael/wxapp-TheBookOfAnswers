@@ -1,4 +1,4 @@
-function answerData() {
+function answer_data() {
   this.defaultContent = ""
   this.defaultSubContent = ""
   this.tutorialTxt = ["默想一个问题", "比如\n明天会顺利吗？\n接下来我该怎么办？\n到底要不要告诉她？", "太阳升起\n\n它会给你一个答案"]
@@ -336,7 +336,7 @@ function answerData() {
   ]
 }
 
-answerData.prototype={
+answer_data.prototype={
 
   getAnswerByIndex: function (index) {
     return this.answers[index]
@@ -356,7 +356,7 @@ answerData.prototype={
 
   getTutorialTxt: function () {
     return this.tutorialTxt
-  }
+  },
 }
 
-module.exports = answerData
+module.exports = answer_data

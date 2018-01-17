@@ -15,7 +15,7 @@
     <image id="cloud_img_3" src="../../assets/sun_rise/cloud_3.png" mode="aspectFit" animation="{{_anim_cloud_3}}"></image>
     <image id="cloud_img_4" src="../../assets/sun_rise/cloud_4.png" mode="aspectFit" animation="{{_anim_cloud_4}}"></image>
   </view>
-  <view class="mountain" bindlongpress="longPress" bindtouchend="touchEnd">
+  <view class="mountain" bindlongpress="longPress" bindtouchend="touchEnd" bindtouchstart='touchStart'>
     <image id="mountain_img" src="../../assets/sun_rise/mountain.png" mode="widthFix"></image>
   </view>
   <view class="man">
@@ -27,8 +27,8 @@
     <image id="bird_img_2" src="../../assets/sun_rise/bird_2.png" mode="aspectFit"></image>
     <image id="bird_img_3" src="../../assets/sun_rise/bird_3.png" mode="aspectFit"></image>
   </view>
-  <text class="content_1">{{content}}</text>
-  <text class="content_2">{{subContent}}</text>
+  <text class="content_1" animation="{{_anim_content}}">{{content}}</text>
+  <text class="content_2" animation="{{_anim_sub_content}}">{{subContent}}</text>
   <view class="tutorial" wx:if="{{isShowTutorialTxt}}">
     <text class="tutorial_txt_1" animation="{{_anim_tutorial_txt_1}}">{{tutorial_txt[0]}}</text>
     <text class="tutorial_txt_2" animation="{{_anim_tutorial_txt_2}}">{{tutorial_txt[1]}}</text>

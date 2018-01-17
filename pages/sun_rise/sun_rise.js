@@ -1,14 +1,15 @@
 // sun_rise.js
 
-var answerData = require("../answers/answerData.js")
+var answer_data = require("../answers/answer_data.js")
 var anim_data = require("./anim_data.js")
 var anim_sun_rise = require("./anim_sun_rise.js")
 var anim_tutorial = require("./anim_tutorial.js")
+var anim_content = require("./anim_content.js")
+var anim_sun_cloud = require("./anim_sun_cloud.js")
 
 var State = {
   toturial: "toturial",
   pressing: "pressing",
-  ending: "ending",
   waiting: "waiting"
 }
 
@@ -23,11 +24,11 @@ Page({
     content: "",
     subContent: "",
     exp: "",
-    tableAnimation: "",
+    tutorial_txt: "",
+
     contentAnimation: "",
     subContentAnimation: "",
     expAnimation: "",
-    tutorial_txt: "",
     /* 动画 */
     _anim_sun_rise: "",
     _anim_tutorial_txt_1: "",
@@ -37,20 +38,25 @@ Page({
     _anim_cloud_2: "",
     _anim_cloud_3: "",
     _anim_cloud_4: "",
+    _anim_content: "",
+    _anim_sub_content: "",
   },
 
   touchStartTime: 0,
   touchEndTime: 0,
   duration: 0,
+  lastIndex: -1,
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.answerData = new answerData()
+    this.answer_data = new answer_data()
     this.anim_data = new anim_data()
     this.anim_sun_rise = new anim_sun_rise()
     this.anim_tutorial = new anim_tutorial()
+    this.anim_content = new anim_content()
+    this.anim_sun_cloud = new anim_sun_cloud()
   },
 
   /**
@@ -94,13 +100,13 @@ Page({
   onShareAppMessage: function () {},
 
   /**
-   * 设置默认文本、初始状态
+   * 设置默认文本、初始状态，教程动画
    */
   initial: function () {
     this.setData({
-      content: this.answerData.getDefaultContent(),
-      subContent: this.answerData.getDefaultSubContent(),
-      tutorial_txt: this.answerData.getTutorialTxt(),
+      content: this.answer_data.getDefaultContent(),
+      subContent: this.answer_data.getDefaultSubContent(),
+      tutorial_txt: this.answer_data.getTutorialTxt(),
       state: State.toturial,
       _anim_sun_rise: this.anim_sun_rise.initial().export(),
       _anim_tutorial_txt_1: this.anim_tutorial.initialTxt().export(),
@@ -108,6 +114,8 @@ Page({
       _anim_tutorial_txt_3: this.anim_tutorial.initialTxt().export(),
       _anim_cloud_1: this.anim_tutorial.initialCloud(true).export(),
       _anim_cloud_2: this.anim_tutorial.initialCloud(false).export(),
+      _anim_cloud_3: this.anim_sun_cloud.initial(true).export(),
+      _anim_cloud_4: this.anim_sun_cloud.initial(false).export(),
     })
 
     setTimeout(function () {
@@ -130,16 +138,35 @@ Page({
   longPress: function(e) {
     if (this.data.state == State.waiting)
     {
-      console.log("long tap start")
       this.touchStartTime = e.timeStamp
 
       var time = this.anim_data.pressDuration + this.anim_data.afterPress
       this.setData({
+        content: "",
+        subContent: "",
         state: State.pressing,
         isShowTutorialTxt: false,
-        _anim_sun_rise: this.anim_sun_rise.moveUp(time).export()
+        _anim_sun_rise: this.anim_sun_rise.initial().export(),
+        _anim_cloud_3: this.anim_sun_cloud.initial(true).export(),
+        _anim_cloud_4: this.anim_sun_cloud.initial(false).export(),
+        _anim_content: this.anim_content.initialTxt().export(),
+        _anim_sub_content: this.anim_content.initialSubTxt().export(),
       })
+
+      setTimeout(function () {
+        this.setData({
+          _anim_sun_rise: this.anim_sun_rise.moveUp(time).export(),
+          _anim_cloud_3: this.anim_sun_cloud.move(time).export(),
+          _anim_cloud_4: this.anim_sun_cloud.move(time).export(),
+        })
+      }.bind(this), 20)
+
+      // 设置计时器，按压结束后一系列动作
+      this.timeout_press_over = setTimeout(this.pressSuccess.bind(this), time)
     }
+  },
+
+  touchStart: function(e) {
   },
 
   touchEnd: function (e) {
@@ -147,14 +174,58 @@ Page({
     {
       this.touchEndTime = e.timeStamp
       this.duration = this.touchEndTime - this.touchStartTime
-      console.log(this.duration)
 
       if (this.duration < this.anim_data.pressDuration) {
+        // 清除计时
+        clearTimeout(this.timeout_press_over)
+
         this.setData({
           state: State.waiting,
-          _anim_sun_rise: this.anim_sun_rise.interrupt(this.duration).export()
+          _anim_sun_rise: this.anim_sun_rise.interrupt(this.duration).export(),
+          _anim_cloud_3: this.anim_sun_cloud.interrupt(this.duration, true).export(),
+          _anim_cloud_4: this.anim_sun_cloud.interrupt(this.duration, false).export(),
+          
         })
       }
     }
   },
+
+  /**
+   * 按压时间到结束的一系列动作
+   */
+  pressSuccess: function () {
+    this.setData({
+      content: this.getRandomAnswer().content,
+      subContent: this.getRandomAnswer().subContent,
+      _anim_content: this.anim_content.contentShow(this.anim_data.contentDuration, 0).export(),
+      _anim_sub_content: this.anim_content.subContentShow(this.anim_data.subContentDuration, this.anim_data.contentInteral + this.anim_data.contentDuration).export()
+    })
+
+    var time = this.anim_data.contentDuration + this.anim_data.contentInteral + this.anim_data.subContentDuration
+
+    setTimeout(function () {
+      this.setData({
+        state: State.waiting
+      })
+    }.bind(this), time)
+  },
+
+  getRandomAnswer: function () {
+    var index = -1;
+    var length = this.answer_data.getAnswerLength()
+    if (this.lastIndex != -1) {
+      // 不是第一次，需要判断重复
+      do {
+        // 防止和上次重复
+        index = Math.floor(Math.random() * length)
+      } while (this.lastIndex == index)
+    } else {
+      // 第一次直接随机
+      index = Math.floor(Math.random() * length)
+    }
+    this.lastIndex = index
+
+    var answer = this.answer_data.getAnswerByIndex(index)
+    return answer
+  }
 })
