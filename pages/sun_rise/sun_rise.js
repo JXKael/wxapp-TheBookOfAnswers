@@ -45,6 +45,8 @@ Page({
   touchEndTime: 0,
   duration: 0,
   lastIndex: -1,
+  expShowable: false,
+  isExpShow: false,
 
   /**
    * 生命周期函数--监听页面加载
@@ -156,6 +158,8 @@ Page({
         _anim_exp: this.anim_exp.initial().export(),
       })
 
+      this.expShowable = false
+
       setTimeout(function () {
         this.setData({
           _anim_sun_rise: this.anim_sun_rise.moveUp(time).export(),
@@ -170,6 +174,19 @@ Page({
   },
 
   touchStart: function(e) {
+  },
+
+  tap: function(e){
+    if (this.expShowable)
+    {
+      this.setData({
+        _anim_exp: this.anim_exp.exp(this.anim_data.expDuration, this.isExpShow ? 0 : 1).export()
+      })
+      this.isExpShow = !this.isExpShow
+      console.log("可以显示")
+    }else{
+      console.log("不可以显示")
+    }
   },
 
   touchEnd: function (e) {
@@ -189,6 +206,8 @@ Page({
           _anim_cloud_4: this.anim_sun_cloud.interrupt(this.duration, false).export(),
           
         })
+
+        this.expShowable = false
       }
     }
   },
@@ -206,14 +225,14 @@ Page({
       exp: answer.exp,
       _anim_content: this.anim_content.contentShow(this.anim_data.contentDuration, 0).export(),
       _anim_sub_content: this.anim_content.subContentShow(this.anim_data.subContentDuration, this.anim_data.contentInteral + this.anim_data.contentDuration).export(),
-      _anim_exp: this.anim_exp.expShow(this.anim_data.expDuration, time).export(),
     })
 
     setTimeout(function () {
       this.setData({
         state: State.waiting
       })
-    }.bind(this), time + this.anim_data.expDuration)
+      this.expShowable = true
+    }.bind(this), time)
   },
 
   getRandomAnswer: function () {

@@ -15,7 +15,7 @@
     <image id="cloud_img_3" src="../../assets/sun_rise/cloud_3.png" mode="aspectFit" animation="{{_anim_cloud_3}}"></image>
     <image id="cloud_img_4" src="../../assets/sun_rise/cloud_4.png" mode="aspectFit" animation="{{_anim_cloud_4}}"></image>
   </view>
-  <view class="mountain" bindlongpress="longPress" bindtouchend="touchEnd" bindtouchstart='touchStart'>
+  <view class="mountain" bindlongpress="longPress" bindtouchend="touchEnd" bindtouchstart="touchStart" bindtap="tap">
     <image id="mountain_img" src="../../assets/sun_rise/mountain.png" mode="widthFix"></image>
   </view>
   <view class="man">
@@ -39,5 +39,4 @@
     <text class="tutorial_txt_2" animation="{{_anim_tutorial_txt_2}}">{{tutorial_txt[1]}}</text>
     <text class="tutorial_txt_3" animation="{{_anim_tutorial_txt_3}}">{{tutorial_txt[2]}}</text>
   </view>
-  
 </view>

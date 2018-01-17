@@ -17,7 +17,7 @@ anim_exp.prototype = {
   },
 
   /**
-   * 1.5s上移
+   * 淡入显示
    */
   expShow: function (time, delay) {
     this.animation = wx.createAnimation({
@@ -26,6 +26,15 @@ anim_exp.prototype = {
       delay: delay
     })
     this.animation.opacity(1).step()
+    return this.animation
+  },
+
+  exp: function (time, alpha) {
+    this.animation = wx.createAnimation({
+      duration: time,
+      timingFunction: "linear",
+    })
+    this.animation.opacity(alpha).step()
     return this.animation
   },
 }
