@@ -178,6 +178,7 @@
   width: 100%;
   margin: auto;
   color: white;
+  z-index: -1;
   position: fixed;
   text-align: center;
   font-size: 27rpx;
@@ -185,10 +186,12 @@
 }
 
 .exp{
+  z-index: -1;
   position: fixed;
   height: 100rpx;
   right: 105rpx;/*让对话框靠右，自适应的时候宽度向左扩张*/
   bottom: 180rpx;
+  pointer-events: none;
 }
 
 .c-dialog{
@@ -298,6 +301,7 @@
 
 .thanks{
   width: 100%;
+  z-index: -1;
   position: fixed;
   bottom: 10rpx;
   text-align: right;
@@ -307,6 +311,6 @@
   color: #9D3170;
   margin-right: 16rpx;
   font-size: 16rpx;
-  text-shadow: 2rpx 2rpx rgba(0,0,0,.7);
+  text-shadow: 2rpx 2rpx rgba(0,0,0,.4);
 }
 
