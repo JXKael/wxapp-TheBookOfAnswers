@@ -27,6 +27,12 @@ function anim_data() {
 
   /* 上方云朵飘动时间 */
   this.cloudFloat = 5000
+
+  /* B文本CSS transition */
+  this.tran_exp_show = "exp-show"
+
+  /* 保存按钮CSS transition */
+  this.tran_save_btn_show = "save-btn-show"
 }
 
 anim_data.prototype = {
