@@ -6,10 +6,13 @@
   </view>
   <!-- 太阳 -->
   <view class="sun" animation="{{_anim_sun_rise}}">
+    <image class="sun-img-whole" src="../../assets/sun_rise/sun_whole.png" mode="widthFix"></image>
+    <!--
     <image id="sun-img-halo1" src="../../assets/sun_rise/sun_halo_1.png" mode="widthFix"></image>
     <image id="sun-img-halo2" src="../../assets/sun_rise/sun_halo_2.png" mode="aspectFill"></image>
     <image id="sun-img-halo3" src="../../assets/sun_rise/sun_halo_3.png" mode="aspectFill"></image>
     <image id="sun" src="../../assets/sun_rise/sun.png" mode="aspectFill"></image>
+    -->
   </view>
   <!-- 云 -->
   <view class="cloud">
