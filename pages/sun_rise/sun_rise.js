@@ -348,9 +348,9 @@ Page({
         this.ctx_big.setTextAlign("center")
         this.ctx_big.setTextBaseline("middle")
         this.ctx_big.setFillStyle("white")
-        this.ctx_big.setFontSize(56)
-        this.ctx_big.fillText(answer.content, 375, 300)
-        this.ctx_big.setFontSize(28)
+        this.ctx_big.setFontSize(55)
+        this.ctx_big.fillText(answer.content, 375, 299)
+        this.ctx_big.setFontSize(25)
         this.ctx_big.fillText(answer.subContent, 375, 508)
 
         this.ctx_big.draw()
