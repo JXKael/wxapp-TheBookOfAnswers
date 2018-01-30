@@ -58,7 +58,7 @@ Page({
   isExpShow: false,
   tapCount: [false, false],
   isScreenshotDrew: false,
-  ctx_small: "",
+  // ctx_small: "",
   ctx_big: "",
 
   /**
@@ -74,7 +74,7 @@ Page({
     // this.anim_exp = new anim_exp()
     this.anim_cloud_move = new anim_cloud_move()
 
-    this.ctx_small = wx.createCanvasContext("canvas-small")
+    // this.ctx_small = wx.createCanvasContext("canvas-small")
     this.ctx_big = wx.createCanvasContext("canvas-big")
   },
 
@@ -307,41 +307,41 @@ Page({
    * 点击保存按钮事件
    */
   onTapSave: function (e) {
-    if (this.data.state == State.waiting){
-      // 直接切换状态
+    if (this.data.state == State.waiting && this.lastIndex != -1){
+      // 显示loading
+      wx.showLoading({
+        title: "保存中",
+        mask: true
+      })
+      // 直接切换状态，显示canvas
       this.setData({
         state: State.saving,
+        isScreenshotHidden: false,  // 不需要二次确认，直接显示canvas
       })
       // 画图
       var imageRes = "../../assets/sun_rise/save_bg.png"
       if (this.isScreenshotDrew)
       {
         // 直接显示即可
-        this.ctx_small.restore()
+        // this.ctx_small.restore()
         this.ctx_big.restore()
         
-        this.showScreenshot()
+        // 不需要二次确认，此函数两个条件通用，在上面setData里面直接显示
+        // this.showScreenshot()
       }else{
-        // 需要重新画图，并延迟显示一下
-        // 显示loading
-        wx.showToast({
-          title: '',
-          icon: "loading",
-          duration: 1000,
-          mask: true
-        })
+        // 需要重新画图
         var answer = this.getLastAnswer()
         // 画小图
-        this.ctx_small.drawImage(imageRes, 0, 0, 150, 267)
-        this.ctx_small.setTextAlign("center")
-        this.ctx_small.setTextBaseline("middle")
-        this.ctx_small.setFillStyle("white")
-        this.ctx_small.setFontSize(11)
-        this.ctx_small.fillText(answer.content, 75, 60)
-        this.ctx_small.setFontSize(4)
-        this.ctx_small.fillText(answer.subContent, 75, 101)
-        this.ctx_small.draw()
-        this.ctx_small.save()
+        // this.ctx_small.drawImage(imageRes, 0, 0, 150, 267)
+        // this.ctx_small.setTextAlign("center")
+        // this.ctx_small.setTextBaseline("middle")
+        // this.ctx_small.setFillStyle("white")
+        // this.ctx_small.setFontSize(11)
+        // this.ctx_small.fillText(answer.content, 75, 60)
+        // this.ctx_small.setFontSize(4)
+        // this.ctx_small.fillText(answer.subContent, 75, 101)
+        // this.ctx_small.draw()
+        // this.ctx_small.save()
 
         // 画大图
         this.ctx_big.drawImage(imageRes, 0, 0, 750, 1334)
@@ -359,16 +359,21 @@ Page({
         this.isScreenshotDrew = true
 
         // 延迟显示
-        setTimeout(function () {
-          this.showScreenshot()
-        }.bind(this), 1000)
+        // setTimeout(function () {
+        //   this.showScreenshot()
+        // }.bind(this), 1000)
       }
+
+      // 直接延迟保存，不要二次确认
+      setTimeout(function () {
+        this.saveScreenFunction()
+      }.bind(this), 200)
     }
   },
 
   showScreenshot: function (e) {
     this.setData({
-      _tran_save_btn_show: "",    // 隐藏保存按钮
+      // _tran_save_btn_show: "",    // 隐藏保存按钮
       isScreenshotHidden: false,
     })
   },
@@ -388,60 +393,64 @@ Page({
         title: "保存中",
         mask: true
       })
-      // 保存
-      wx.canvasToTempFilePath({    // canvs导出成图片
-        x: 0,
-        y: 0,
-        width: 750,
-        height: 1334,
-        canvasId: 'canvas-big',
-        success: function (res) {    // 导出图片成功
-          // 保存到相册
-          wx.saveImageToPhotosAlbum({
-            filePath: res.tempFilePath,
-            success: function (e) {  // 保存到相册成功
-              // 隐藏loading
-              wx.hideLoading()
-              // 提示成功
-              wx.showToast({
-                title: "保存成功",
-                icon: "success",
-                duration: 1000,
-                mask: true,
-              })
-              // 延迟关闭screenshot
-              setTimeout(function () {
-                this.hidScreenshot()
-              }.bind(this), 1000)
-            }.bind(this),
-            fail: function (e) {   // 保存到相册失败
-              // 隐藏loading
-              wx.hideLoading()
-              // 提示失败
-              wx.showToast({
-                title: "保存失败",
-                icon: "none",
-                duration: 1000,
-                mask: true,
-              })
-              // 不关闭screenshot
-            }.bind(this)
-          })
-        }.bind(this),
-        fail: function (e) {       // 导出图片失败
-          // 隐藏loading
-          wx.hideLoading()
-          // 提示失败
-          wx.showToast({
-            title: "导出失败",
-            icon: "none",
-            duration: 1000,
-            mask: true,
-          })
-          // 不关闭screenshot
-        }.bind(this)
-      })
+      this.saveScreenFunction()
     }
+  },
+
+  saveScreenFunction: function () {
+    // 保存
+    wx.canvasToTempFilePath({    // canvs导出成图片
+      x: 0,
+      y: 0,
+      width: 750,
+      height: 1334,
+      canvasId: 'canvas-big',
+      success: function (res) {    // 导出图片成功
+        // 保存到相册
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+          success: function (e) {  // 保存到相册成功
+            // 隐藏loading
+            wx.hideLoading()
+            // 提示成功
+            wx.showToast({
+              title: "保存成功",
+              icon: "success",
+              duration: 1000,
+              mask: true,
+            })
+            // 延迟关闭screenshot
+            setTimeout(function () {
+              this.hidScreenshot()
+            }.bind(this), 1000)
+          }.bind(this),
+          fail: function (e) {   // 保存到相册失败
+            // 隐藏loading
+            wx.hideLoading()
+            // 提示失败
+            wx.showToast({
+              title: "保存失败",
+              icon: "none",
+              duration: 1000,
+              mask: true,
+            })
+            // 不关闭screenshot
+          }.bind(this)
+        })
+      }.bind(this),
+      fail: function (e) {       // 导出图片失败
+        // 隐藏loading
+        wx.hideLoading()
+        // 提示失败
+        wx.showToast({
+          title: "导出失败",
+          icon: "none",
+          duration: 1000,
+          mask: true,
+        })
+        // 不关闭screenshot
+      }.bind(this)
+    })
   },
 
   /**

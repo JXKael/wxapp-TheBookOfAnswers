@@ -1,4 +1,8 @@
 /* answers.wxss */
+.txtColor-white{
+  color: white;
+}
+
 .background{
   width: 100%;
   height: 100%;
@@ -166,7 +170,6 @@
   width: 100%;
   z-index: -1;
   margin: auto;
-  color: white;
   align-items: center;
   position: fixed;
   text-align: center;
@@ -177,7 +180,6 @@
 .content2{
   width: 100%;
   margin: auto;
-  color: white;
   z-index: -1;
   position: fixed;
   text-align: center;
@@ -244,7 +246,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  color: white;
   position: fixed;
   top: 120rpx;
   pointer-events: none;
@@ -309,6 +310,9 @@
 }
 
 .save-btn{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   position: fixed;
   left: 0rpx;
   bottom: 0rpx;
@@ -318,7 +322,11 @@
 .save-btn-img{
   max-width: 43rpx;
   max-height: 52rpx;
-  margin: 20rpx;
+  margin: 10rpx;
+}
+
+.save-txt{
+  font-size: 30rpx;
 }
 
 .save-btn-show{
