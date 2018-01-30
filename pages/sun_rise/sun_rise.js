@@ -307,7 +307,7 @@ Page({
    * 点击保存按钮事件
    */
   onTapSave: function (e) {
-    if (this.data.state == State.waiting && this.lastIndex != -1){
+    if (this.data.state == State.waiting && this.lastIndex != -1 && this.data._tran_save_btn_show != ""){
       // 显示loading
       wx.showLoading({
         title: "保存中",
@@ -419,7 +419,7 @@ Page({
               duration: 1000,
               mask: true,
             })
-            // 延迟关闭screenshot
+            // 切回waiting状态
             setTimeout(function () {
               this.hidScreenshot()
             }.bind(this), 1000)
@@ -434,7 +434,10 @@ Page({
               duration: 1000,
               mask: true,
             })
-            // 不关闭screenshot
+            // 切回waiting状态
+            setTimeout(function () {
+              this.hidScreenshot()
+            }.bind(this), 1000)
           }.bind(this)
         })
       }.bind(this),
@@ -448,7 +451,10 @@ Page({
           duration: 1000,
           mask: true,
         })
-        // 不关闭screenshot
+        // 切回waiting状态
+        setTimeout(function () {
+          this.hidScreenshot()
+        }.bind(this), 1000)
       }.bind(this)
     })
   },
