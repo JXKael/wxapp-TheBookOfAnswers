@@ -77,7 +77,7 @@
   position: fixed;
   max-width: 125rpx;
   max-height: 70rpx;
-  top: 143rpx;
+  top: 225rpx;
   right: 32rpx;
 }
 
@@ -85,7 +85,7 @@
   position: fixed;
   max-width: 125rpx;
   max-height: 70rpx;
-  top: 307rpx;
+  top: 389rpx;
   left: 32rpx;
 }
 
@@ -180,7 +180,7 @@
   position: fixed;
   text-align: center;
   font-size: 56rpx;
-  top: 223rpx;
+  top: 305rpx;
 }
 
 .content2{
@@ -190,7 +190,7 @@
   position: fixed;
   text-align: center;
   font-size: 27rpx;
-  top: 455rpx;
+  top: 537rpx;
 }
 
 .exp{
@@ -253,7 +253,7 @@
   align-items: center;
   justify-content: space-between;
   position: fixed;
-  top: 120rpx;
+  top: 202rpx;
   pointer-events: none;
 }
 
@@ -326,9 +326,9 @@
 }
 
 .save-btn-img{
-  max-width: 43rpx;
-  max-height: 52rpx;
-  margin: 10rpx;
+  max-width: 66rpx;
+  max-height: 66rpx;
+  margin: 0rpx 0rpx 28rpx 24rpx;
 }
 
 .save-txt{

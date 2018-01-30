@@ -60,7 +60,7 @@
   <!-- 保存按钮 -->
   <view class="save-btn {{_tran_save_btn_show}}" bindtap="onTapSave">
     <image class="save-btn-img" src="../../assets/sun_rise/save_btn.png"></image>
-    <text class="save-txt txtColor-white">保存</text>
+    <!-- <text class="save-txt txtColor-white">保存</text> -->
   </view>
   <!-- 截图画图界面，屏幕中不会显示出来 -->
   <!-- hidden="{{isScreenshotHidden}}" -->
