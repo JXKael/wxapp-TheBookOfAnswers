@@ -1,8 +1,7 @@
 function answer_data() {
   this.defaultContent = ""
   this.defaultSubContent = ""
-  this.tutorialTxt = ["默想一个问题", "比如\n明天会顺利吗？\n接下来我该怎么办？\n到底要不要告诉她？", "长按圆圈\n\n太阳升起\n\n它会给你一个答案"]
-
+  this.tutorialTxt = ["默想一个问题", "比如\n明天会顺利吗？\n接下来我该怎么办？\n到底要不要告诉她？", "太阳升起\n\n它会给你一个答案"]
   this.answers = [
     { content: "寤寐思服，辗转反侧", subContent: "改自：《诗经·关雎》", exp: "求之不得..." },
     { content: "桃之夭夭，灼灼其华", subContent: "取自：《诗经·桃夭》", exp: "红红火火..." },
