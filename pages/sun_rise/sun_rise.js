@@ -6,14 +6,15 @@ var anim_sun_rise = require("./anim_sun_rise.js")
 var anim_tutorial = require("./anim_tutorial.js")
 var anim_content = require("./anim_content.js")
 var anim_sun_cloud = require("./anim_sun_cloud.js")
-var anim_exp = require("./anim_exp.js")
+// var anim_exp = require("./anim_exp.js")
 var anim_cloud_move = require("./anim_cloud_move.js")
 
 
 var State = {
   toturial: "toturial",
   pressing: "pressing",
-  waiting: "waiting"
+  waiting: "waiting",
+  saving: "saving"
 }
 
 Page({
@@ -28,7 +29,7 @@ Page({
     subContent: "",
     exp: "",
     tutorial_txt: "",
-    isTSH: true,
+    isThx: true,
     /* 动画 */
     _anim_sun_rise: "",
     _anim_tutorial_txt_1: "",
@@ -42,7 +43,11 @@ Page({
     _anim_cloud_4: "",
     _anim_content: "",
     _anim_sub_content: "",
-    _anim_exp: "",
+    // _anim_exp: "",
+
+    _tran_exp_show: "",
+    _tran_save_btn_show: "",
+    isScreenshotHidden: true,
   },
 
   touchStartTime: 0,
@@ -52,6 +57,9 @@ Page({
   expShowable: false,
   isExpShow: false,
   tapCount: [false, false],
+  isScreenshotDrew: false,
+  // ctx_small: "",
+  ctx_big: "",
 
   /**
    * 生命周期函数--监听页面加载
@@ -63,8 +71,11 @@ Page({
     this.anim_tutorial = new anim_tutorial()
     this.anim_content = new anim_content()
     this.anim_sun_cloud = new anim_sun_cloud()
-    this.anim_exp = new anim_exp()
+    // this.anim_exp = new anim_exp()
     this.anim_cloud_move = new anim_cloud_move()
+
+    // this.ctx_small = wx.createCanvasContext("canvas-small")
+    this.ctx_big = wx.createCanvasContext("canvas-big")
   },
 
   /**
@@ -91,21 +102,6 @@ Page({
   onUnload: function () {},
 
   /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {},
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {},
-
-  /**
    * 设置默认文本、初始状态，教程动画
    */
   initial: function () {
@@ -125,7 +121,8 @@ Page({
       _anim_cloud_2: this.anim_tutorial.initialCloud(false).export(),
       _anim_cloud_3: this.anim_sun_cloud.initial(true).export(),
       _anim_cloud_4: this.anim_sun_cloud.initial(false).export(),
-      _anim_exp: this.anim_exp.initial().export()
+      // _anim_exp: this.anim_exp.initial().export()
+      _tran_exp_show: ""
     })
 
     setTimeout(function () {
@@ -167,10 +164,16 @@ Page({
     }.bind(this), this.anim_data.tutorialDuration())
   },
 
-  longPress: function(e) {
+  /**
+   * ---------------------------  山点击功能，主要功能  ---------------------------
+   */
+
+  onMountainLongPress: function(e) {
     if (this.data.state == State.waiting)
     {
       this.touchStartTime = e.timeStamp
+
+      this.isScreenshotDrew = false    // 屏幕截图设置为需要重新画
 
       var time = this.anim_data.pressDuration + this.anim_data.afterPress
 
@@ -188,7 +191,9 @@ Page({
 
         _anim_content: this.anim_content.initialTxt().export(),
         _anim_sub_content: this.anim_content.initialSubTxt().export(),
-        _anim_exp: this.anim_exp.initial().export(),
+        // _anim_exp: this.anim_exp.initial().export(),
+        _tran_exp_show: "",
+        _tran_save_btn_show: ""    // 隐藏保存按钮
       })
 
       this.expShowable = false
@@ -206,41 +211,21 @@ Page({
     }
   },
 
-  touchStart: function(e) {
-  },
-
-  tap: function(e){
-    if (this.expShowable)
+  onMountainTap: function(e){
+    if (this.data.state == State.waiting && this.expShowable)
     {
       this.setData({
-        _anim_exp: this.anim_exp.exp(this.anim_data.expDuration, this.isExpShow ? 0 : 1).export()
+        // _anim_exp: this.anim_exp.exp(this.anim_data.expDuration, this.isExpShow ? 0 : 1).export()
+        _tran_exp_show: this.isExpShow ? "" : this.anim_data.tran_exp_show
       })
       this.isExpShow = !this.isExpShow
-    }
-  },
-
-  cloudTap_1: function (e) {
-    this.tapCount[0] = true
-  },
-
-  cloudTap_2: function (e) {
-    if (this.tapCount[0])
+    }else if (this.data.state == State.saving)
     {
-      this.tapCount[1] = true
-    }
-    if (this.tapCount[0] && this.tapCount[1])
-    {
-      var temp = this.data.isTSH
-      this.setData({
-        isTSH: !temp
-      })
-
-      this.tapCount[0] = false
-      this.tapCount[1] = false
+      this.hidScreenshot()
     }
   },
 
-  touchEnd: function (e) {
+  onMountainTouchEnd: function (e) {
     if (this.data.state == State.pressing)
     {
       this.touchEndTime = e.timeStamp
@@ -280,12 +265,15 @@ Page({
 
     setTimeout(function () {
       this.setData({
-        state: State.waiting
+        state: State.waiting,
+        _tran_save_btn_show: this.anim_data.tran_save_btn_show    // 显示保存按钮
       })
       this.expShowable = true
     }.bind(this), time)
   },
-
+  /**
+   * 随机答案，核心函数
+   */
   getRandomAnswer: function () {
     var index = -1;
     var length = this.answer_data.getAnswerLength()
@@ -302,5 +290,197 @@ Page({
     this.lastIndex = index
     var answer = this.answer_data.getAnswerByIndex(index)
     return answer
-  }
+  },
+
+  /**
+   * 获得上次的答案
+   */
+  getLastAnswer: function () {
+    return this.answer_data.getAnswerByIndex(this.lastIndex)
+  },
+
+  /**
+   * ---------------------------  保存截图功能  ---------------------------
+   */
+
+  /**
+   * 点击保存按钮事件
+   */
+  onTapSave: function (e) {
+    if (this.data.state == State.waiting && this.lastIndex != -1 && this.data._tran_save_btn_show != ""){
+      // 显示loading
+      wx.showLoading({
+        title: "保存中",
+        mask: true
+      })
+      // 直接切换状态，显示canvas
+      this.setData({
+        state: State.saving,
+        isScreenshotHidden: false,  // 不需要二次确认，直接显示canvas
+      })
+      // 画图
+      var imageRes = "../../assets/sun_rise/save_bg.png"
+      var imageQRCode = "../../assets/sun_rise/save_QR_code.jpg"
+      if (this.isScreenshotDrew)
+      {
+        // 直接显示即可
+        // this.ctx_small.restore()
+        this.ctx_big.restore()
+        
+        // 不需要二次确认，此函数两个条件通用，在上面setData里面直接显示
+        // this.showScreenshot()
+      }else{
+        // 需要重新画图
+        var answer = this.getLastAnswer()
+        // 画小图
+        // this.ctx_small.drawImage(imageRes, 0, 0, 150, 267)
+        // this.ctx_small.setTextAlign("center")
+        // this.ctx_small.setTextBaseline("middle")
+        // this.ctx_small.setFillStyle("white")
+        // this.ctx_small.setFontSize(11)
+        // this.ctx_small.fillText(answer.content, 75, 60)
+        // this.ctx_small.setFontSize(4)
+        // this.ctx_small.fillText(answer.subContent, 75, 101)
+        // this.ctx_small.draw()
+        // this.ctx_small.save()
+
+        // 画大图
+        this.ctx_big.drawImage(imageRes, 0, 0, 750, 1334)
+        this.ctx_big.drawImage(imageQRCode, 0, 1334, 750, 750)
+        this.ctx_big.setTextAlign("center")
+        this.ctx_big.setTextBaseline("middle")
+        this.ctx_big.setFillStyle("white")
+        this.ctx_big.setFontSize(55)
+        this.ctx_big.fillText(answer.content, 375, 299)
+        this.ctx_big.setFontSize(25)
+        this.ctx_big.fillText(answer.subContent, 375, 508)
+
+        this.ctx_big.draw()
+        this.ctx_big.save()
+
+        this.isScreenshotDrew = true
+
+        // 延迟显示
+        // setTimeout(function () {
+        //   this.showScreenshot()
+        // }.bind(this), 1000)
+      }
+
+      // 直接延迟保存，不要二次确认
+      setTimeout(function () {
+        this.saveScreenFunction()
+      }.bind(this), 200)
+    }
+  },
+
+  showScreenshot: function (e) {
+    this.setData({
+      // _tran_save_btn_show: "",    // 隐藏保存按钮
+      isScreenshotHidden: false,
+    })
+  },
+
+  hidScreenshot: function (e) {
+    this.setData({
+      state: State.waiting,
+      _tran_save_btn_show: this.anim_data.tran_save_btn_show,    // 显示保存按钮
+      isScreenshotHidden: true,
+    })
+  },
+
+  onTapSaveConfirm: function (e) {
+    if (this.data.state == State.saving){
+      // 弹出loading
+      wx.showLoading({
+        title: "保存中",
+        mask: true
+      })
+      this.saveScreenFunction()
+    }
+  },
+
+  saveScreenFunction: function () {
+    // 保存
+    wx.canvasToTempFilePath({    // canvs导出成图片
+      x: 0,
+      y: 0,
+      width: 750,
+      height: 2084,
+      canvasId: 'canvas-big',
+      success: function (res) {    // 导出图片成功
+        // 保存到相册
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+          success: function (e) {  // 保存到相册成功
+            // 隐藏loading
+            wx.hideLoading()
+            // 提示成功
+            wx.showToast({
+              title: "保存成功",
+              icon: "success",
+              duration: 1000,
+              mask: true,
+            })
+            // 切回waiting状态
+            setTimeout(function () {
+              this.hidScreenshot()
+            }.bind(this), 1000)
+          }.bind(this),
+          fail: function (e) {   // 保存到相册失败
+            // 隐藏loading
+            wx.hideLoading()
+            // 提示失败
+            wx.showToast({
+              title: "保存失败",
+              icon: "none",
+              duration: 1000,
+              mask: true,
+            })
+            // 切回waiting状态
+            setTimeout(function () {
+              this.hidScreenshot()
+            }.bind(this), 1000)
+          }.bind(this)
+        })
+      }.bind(this),
+      fail: function (e) {       // 导出图片失败
+        // 隐藏loading
+        wx.hideLoading()
+        // 提示失败
+        wx.showToast({
+          title: "导出失败",
+          icon: "none",
+          duration: 1000,
+          mask: true,
+        })
+        // 切回waiting状态
+        setTimeout(function () {
+          this.hidScreenshot()
+        }.bind(this), 1000)
+      }.bind(this)
+    })
+  },
+
+  /**
+   * ---------------------------  彩蛋致谢功能  ---------------------------
+   */
+
+  onTapCloud_1: function (e) {
+    this.tapCount[0] = true
+  },
+
+  onTapCloud_2: function (e) {
+    if (this.tapCount[0]) {
+      this.tapCount[1] = true
+    }
+    if (this.tapCount[0] && this.tapCount[1]) {
+      var temp = this.data.isThx
+      this.setData({
+        isThx: !temp
+      })
+
+      this.tapCount[0] = false
+      this.tapCount[1] = false
+    }
+  },
 })
