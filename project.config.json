@@ -8,7 +8,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.7.2",
+	"libVersion": "1.9.1",
 	"appid": "wxe51ed188e9d69368",
 	"projectname": "TheBookOfAnswers",
 	"condition": {

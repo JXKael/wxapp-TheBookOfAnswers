@@ -1,43 +1,55 @@
 <!--sun_rise.wxml-->
 <view class="container">
+  <!-- 大背景 -->
   <view class="background">
-    <image id="background_img" src="../../assets/sun_rise/bg.png" mode="scaleToFill"></image> 
+    <image id="background-img" src="../../assets/sun_rise/bg.png" mode="scaleToFill"></image> 
   </view>
+  <!-- 太阳 -->
   <view class="sun" animation="{{_anim_sun_rise}}">
-    <image id="sun_img_halo_1" src="../../assets/sun_rise/sun_halo_1.png" mode="widthFix"></image>
-    <image id="sun_img_halo_2" src="../../assets/sun_rise/sun_halo_2.png" mode="aspectFill"></image>
-    <image id="sun_img_halo_3" src="../../assets/sun_rise/sun_halo_3.png" mode="aspectFill"></image>
+    <image class="sun-img-whole" src="../../assets/sun_rise/sun_whole.png" mode="widthFix"></image>
+    <!--
+    <image id="sun-img-halo1" src="../../assets/sun_rise/sun_halo_1.png" mode="widthFix"></image>
+    <image id="sun-img-halo2" src="../../assets/sun_rise/sun_halo_2.png" mode="aspectFill"></image>
+    <image id="sun-img-halo3" src="../../assets/sun_rise/sun_halo_3.png" mode="aspectFill"></image>
     <image id="sun" src="../../assets/sun_rise/sun.png" mode="aspectFill"></image>
+    -->
   </view>
+  <!-- 云 -->
   <view class="cloud">
-    <image id="cloud_img_1" src="../../assets/sun_rise/cloud_1.png" mode="aspectFit" animation="{{_anim_cloud_1}}" bindtap="cloudTap_1"></image>
-    <image id="cloud_img_2" src="../../assets/sun_rise/cloud_2.png" mode="aspectFit" animation="{{_anim_cloud_2}}" bindtap="cloudTap_2"></image>
-    <image id="cloud_img_3" src="../../assets/sun_rise/cloud_3.png" mode="aspectFit" animation="{{_anim_cloud_3}}"></image>
-    <image id="cloud_img_4" src="../../assets/sun_rise/cloud_4.png" mode="aspectFit" animation="{{_anim_cloud_4}}"></image>
+    <image id="cloud-img1" src="../../assets/sun_rise/cloud_1.png" mode="aspectFit" animation="{{_anim_cloud_1}}" bindtap="onTapCloud_1"></image>
+    <image id="cloud-img2" src="../../assets/sun_rise/cloud_2.png" mode="aspectFit" animation="{{_anim_cloud_2}}" bindtap="onTapCloud_2"></image>
+    <image id="cloud-img3" src="../../assets/sun_rise/cloud_3.png" mode="aspectFit" animation="{{_anim_cloud_3}}"></image>
+    <image id="cloud-img4" src="../../assets/sun_rise/cloud_4.png" mode="aspectFit" animation="{{_anim_cloud_4}}"></image>
   </view>
-  <view class="mountain" bindlongpress="longPress" bindtouchend="touchEnd" bindtouchstart="touchStart" bindtap="tap">
-    <image id="mountain_img" src="../../assets/sun_rise/mountain.png" mode="widthFix"></image>
+  <!-- 山 -->
+  <view class="mountain" bindlongpress="onMountainLongPress" bindtouchend="onMountainTouchEnd" bindtap="onMountainTap">
+    <image id="mountain-img" src="../../assets/sun_rise/mountain.png" mode="widthFix"></image>
   </view>
+  <!-- 人 -->
   <view class="man">
-    <image id="man_img" src="../../assets/sun_rise/man.png" mode="aspectFit"></image>
-    <image id="man_shadow" src="../../assets/sun_rise/man_shadow.png" mode="aspectFit"></image>
+    <image id="man-img" src="../../assets/sun_rise/man.png" mode="aspectFit"></image>
+    <image id="man-shadow" src="../../assets/sun_rise/man_shadow.png" mode="aspectFit"></image>
   </view>
+  <!-- 鸟 -->
   <view class="bird">
-    <image id="bird_img_1" src="../../assets/sun_rise/bird_1.png" mode="aspectFit"></image>
-    <image id="bird_img_2" src="../../assets/sun_rise/bird_2.png" mode="aspectFit"></image>
-    <image id="bird_img_3" src="../../assets/sun_rise/bird_3.png" mode="aspectFit"></image>
+    <image id="bird-img1" src="../../assets/sun_rise/bird_1.png" mode="aspectFit"></image>
+    <image id="bird-img2" src="../../assets/sun_rise/bird_2.png" mode="aspectFit"></image>
+    <image id="bird-img3" src="../../assets/sun_rise/bird_3.png" mode="aspectFit"></image>
   </view>
-  <text class="content_1" animation="{{_anim_content}}">{{content}}</text>
-  <text class="content_2" animation="{{_anim_sub_content}}">{{subContent}}</text>
-  <view class="exp" animation="{{_anim_exp}}">
+  <!-- 文本内容 -->
+  <text class="content1 txtColor-white" animation="{{_anim_content}}">{{content}}</text>
+  <text class="content2 txtColor-white" animation="{{_anim_sub_content}}">{{subContent}}</text>
+  <!-- animation="{{_anim_exp}}" -->
+  <view class="exp {{_tran_exp_show}}">
 		<view class="c-dialog">
-      <text id="exp_txt">{{exp}}</text>
+      <text id="exp-txt">{{exp}}</text>
     </view>
 	</view>
-  <view class="tutorial" wx:if="{{isShowTutorialTxt}}">
-    <text class="tutorial_txt_1" animation="{{_anim_tutorial_txt_1}}">{{tutorial_txt[0]}}</text>
-    <text class="tutorial_txt_2" animation="{{_anim_tutorial_txt_2}}">{{tutorial_txt[1]}}</text>
-    <text class="tutorial_txt_3" animation="{{_anim_tutorial_txt_3}}">{{tutorial_txt[2]}}</text>
+  <!-- 引导界面 -->
+  <view class="tutorial txtColor-white" wx:if="{{isShowTutorialTxt}}">
+    <text class="tutorial-txt1" animation="{{_anim_tutorial_txt_1}}">{{tutorial_txt[0]}}</text>
+    <text class="tutorial-txt2" animation="{{_anim_tutorial_txt_2}}">{{tutorial_txt[1]}}</text>
+    <text class="tutorial-txt3" animation="{{_anim_tutorial_txt_3}}">{{tutorial_txt[2]}}</text>
     <view class="circle-container">
       <view class="circle" animation="{{_anim_circle}}"></view>
     </view>
@@ -45,7 +57,21 @@
       <view class="circle-line" animation="{{_anim_circle_line}}"></view>
     </view>
   </view>
-  <view class="thanks" hidden="{{isTSH}}">
-    <text class="thanks_txt">Designed by LYZ & JXK & ZX</text>
+  <!-- 保存按钮 -->
+  <view class="save-btn {{_tran_save_btn_show}}" bindtap="onTapSave">
+    <image class="save-btn-img" src="../../assets/sun_rise/save_btn.png"></image>
+    <!-- <text class="save-txt txtColor-white">保存</text> -->
   </view>
+  <!-- 截图画图界面，屏幕中不会显示出来 -->
+  <!-- hidden="{{isScreenshotHidden}}" -->
+  <view class="screenshot" hidden="true">
+    <canvas class="canvas-small" canvas-id="canvas-small"></canvas>
+    <image class="save-btn-img save-confirm" src="../../assets/sun_rise/save_btn.png" bindtap="onTapSaveConfirm"></image>
+  </view>
+  <canvas class="canvas-big" canvas-id="canvas-big" hidden="{{isScreenshotHidden}}"></canvas>
+  <!-- 彩蛋致谢 -->
+  <view class="thanks" hidden="{{isThx}}">
+    <text class="thanks-txt">Designed by LYZ & JXK & ZX</text>
+  </view>
+  <!-- <text class="debug">{{state}}</text> -->
 </view>

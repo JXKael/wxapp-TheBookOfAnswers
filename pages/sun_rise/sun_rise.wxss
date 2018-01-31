@@ -1,4 +1,8 @@
 /* answers.wxss */
+.txtColor-white{
+  color: white;
+}
+
 .background{
   width: 100%;
   height: 100%;
@@ -6,7 +10,7 @@
   position: fixed;
 }
 
-#background_img{
+#background-img{
   width: 100%;
   height: 100%;
 }
@@ -22,13 +26,19 @@
   align-items: flex-end;
 }
 
-#sun_img_halo_1{
+#sun-img-halo1{
   width: 100%;
   max-height: 723rpx;
   margin: auto;
 }
 
-#sun_img_halo_2{
+.sun-img-whole{
+  width: 100%;
+  max-height: 723rpx;
+  margin: auto;
+}
+
+#sun-img-halo2{
   width: 100%;
   max-width: 229rpx;
   max-height: 229rpx;
@@ -38,7 +48,7 @@
   bottom: 187rpx;
 }
 
-#sun_img_halo_3{
+#sun-img-halo3{
   width: 100%;
   max-width: 180rpx;
   max-height: 180rpx;
@@ -63,23 +73,23 @@
   z-index: -4;
 }
 
-#cloud_img_1{
+#cloud-img1{
   position: fixed;
   max-width: 125rpx;
   max-height: 70rpx;
-  top: 143rpx;
+  top: 225rpx;
   right: 32rpx;
 }
 
-#cloud_img_2{
+#cloud-img2{
   position: fixed;
   max-width: 125rpx;
   max-height: 70rpx;
-  top: 307rpx;
+  top: 389rpx;
   left: 32rpx;
 }
 
-#cloud_img_3{
+#cloud-img3{
   position: fixed;
   max-width: 103rpx;
   max-height: 50rpx;
@@ -87,7 +97,7 @@
   bottom: 422rpx;
 }
 
-#cloud_img_4{
+#cloud-img4{
   position: fixed;
   max-width: 75rpx;
   max-height: 30rpx;
@@ -106,7 +116,7 @@
   align-items: flex-end;
 }
 
-#mountain_img{
+#mountain-img{
   width: 100%;
   max-height: 422rpx;
   margin: auto;
@@ -117,7 +127,7 @@
   z-index: -2;
 }
 
-#man_img{
+#man-img{
   max-width: 13rpx;
   max-height: 31rpx;
   position: fixed;
@@ -125,7 +135,7 @@
   bottom: 150rpx;
 }
 
-#man_shadow{
+#man-shadow{
   max-width: 37rpx;
   max-height: 26rpx;
   position: fixed;
@@ -138,7 +148,7 @@
   z-index: -2;
 }
 
-#bird_img_1{
+#bird-img1{
   max-width: 25rpx;
   max-height: 13rpx;
   position: fixed;
@@ -146,7 +156,7 @@
   bottom: 193rpx;
 }
 
-#bird_img_2{
+#bird-img2{
   max-width: 20rpx;
   max-height: 10rpx;
   position: fixed;
@@ -154,7 +164,7 @@
   bottom: 93rpx;
 }
 
-#bird_img_3{
+#bird-img3{
   max-width: 13rpx;
   max-height: 6rpx;
   position: fixed;
@@ -162,27 +172,25 @@
   bottom: 79rpx;
 }
 
-.content_1{
+.content1{
   width: 100%;
   z-index: -1;
   margin: auto;
-  color: white;
   align-items: center;
   position: fixed;
   text-align: center;
   font-size: 56rpx;
-  top: 223rpx;
+  top: 305rpx;
 }
 
-.content_2{
+.content2{
   width: 100%;
   margin: auto;
-  color: white;
   z-index: -1;
   position: fixed;
   text-align: center;
   font-size: 27rpx;
-  top: 455rpx;
+  top: 537rpx;
 }
 
 .exp{
@@ -192,6 +200,15 @@
   right: 105rpx;/*让对话框靠右，自适应的时候宽度向左扩张*/
   bottom: 180rpx;
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 1s;
+  -webkit-transition: opacity 1s;
+}
+
+.exp-show{
+  opacity: 1;
+  transition: opacity 1s;
+  -webkit-transition: opacity 1s;
 }
 
 .c-dialog{
@@ -217,7 +234,7 @@
   border-right: 20rpx solid transparent;
 }
 
-#exp_txt{
+#exp-txt{
   padding: 10rpx 20rpx;
   margin: auto;
   vertical-align: middle;
@@ -235,20 +252,19 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  color: white;
   position: fixed;
-  top: 120rpx;
+  top: 202rpx;
   pointer-events: none;
 }
 
-.tutorial_txt_1{
+.tutorial-txt1{
   width: 100%;
   margin: auto;
   text-align: center;
   font-size: 40rpx;
 }
 
-.tutorial_txt_2{
+.tutorial-txt2{
   width: 100%;
   margin-top: 80rpx;
   text-align: center;
@@ -256,7 +272,7 @@
   line-height: 60rpx;
 }
 
-.tutorial_txt_3{
+.tutorial-txt3{
   width: 100%;
   margin-top: 80rpx;
   text-align: center;
@@ -299,6 +315,61 @@
   box-shadow: 0 0 20rpx 0 rgba(0,0,0,.2);
 }
 
+.save-btn{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  left: 0rpx;
+  bottom: 0rpx;
+  opacity: 0;
+}
+
+.save-btn-img{
+  max-width: 66rpx;
+  max-height: 66rpx;
+  margin: 0rpx 0rpx 28rpx 24rpx;
+}
+
+.save-txt{
+  font-size: 30rpx;
+}
+
+.save-btn-show{
+  opacity: 1;
+  transition: opacity 1s;
+}
+
+.screenshot{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 200rpx;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.canvas-small{
+  width: 150px;
+  height: 267px;
+  box-shadow: 0 0 25rpx 0 rgba(0,0,0,.6);
+}
+
+.save-confirm{
+  margin: 40rpx;
+  pointer-events: initial;
+}
+
+.canvas-big{
+  width: 750px;
+  height: 2084px;
+  position: fixed;
+  left: 1000rpx;
+  z-index: -10; 
+}
+
 .thanks{
   width: 100%;
   z-index: -1;
@@ -307,7 +378,7 @@
   text-align: right;
 }
 
-.thanks_txt{
+.thanks-txt{
   color: #9D3170;
   margin-right: 16rpx;
   font-size: 16rpx;
