@@ -369,7 +369,7 @@ Page({
       // 直接延迟保存，不要二次确认
       setTimeout(function () {
         this.saveScreenFunction()
-      }.bind(this), 200)
+      }.bind(this), 500)
     }
   },
 
