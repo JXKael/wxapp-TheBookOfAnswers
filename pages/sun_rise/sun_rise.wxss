@@ -364,7 +364,7 @@
 
 .canvas-big{
   width: 750px;
-  height: 1334px;
+  height: 2084px;
   position: fixed;
   left: 1000rpx;
   z-index: -10; 

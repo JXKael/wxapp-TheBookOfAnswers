@@ -320,6 +320,7 @@ Page({
       })
       // 画图
       var imageRes = "../../assets/sun_rise/save_bg.png"
+      var imageQRCode = "../../assets/sun_rise/save_QR_code.jpg"
       if (this.isScreenshotDrew)
       {
         // 直接显示即可
@@ -345,6 +346,7 @@ Page({
 
         // 画大图
         this.ctx_big.drawImage(imageRes, 0, 0, 750, 1334)
+        this.ctx_big.drawImage(imageQRCode, 0, 1334, 750, 750)
         this.ctx_big.setTextAlign("center")
         this.ctx_big.setTextBaseline("middle")
         this.ctx_big.setFillStyle("white")
@@ -403,7 +405,7 @@ Page({
       x: 0,
       y: 0,
       width: 750,
-      height: 1334,
+      height: 2084,
       canvasId: 'canvas-big',
       success: function (res) {    // 导出图片成功
         // 保存到相册
