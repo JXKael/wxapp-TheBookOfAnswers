@@ -1,7 +1,7 @@
 function answer_data() {
   this.defaultContent = ""
   this.defaultSubContent = ""
-  this.tutorialTxt = ["默想一个问题", "比如\n明天会顺利吗？\n接下来我该怎么办？\n到底要不要告诉她？", "太阳升起\n\n它会给你一个答案"]
+  this.tutorialTxt = ["默想一个问题", "比如\n明天会顺利吗？\n接下来我该怎么办？\n到底要不要告诉她？", "长按圆圈\n\n太阳升起\n\n它会给你一个答案"]
   this.answers = [
     { content: "寤寐思服，辗转反侧", subContent: "改自：《诗经·关雎》", exp: "求之不得..." },
     { content: "桃之夭夭，灼灼其华", subContent: "取自：《诗经·桃夭》", exp: "红红火火..." },
@@ -67,6 +67,7 @@ function answer_data() {
 
     { content: "千里之堤，毁于蚁穴", subContent: "改自：《韩非子·喻老》", exp: "别忽略小问题..." },
 
+    { content: "流水不腐", subContent: "改自：《吕氏春秋》", exp: "动起来..." },
 
     { content: "一鼓作气", subContent: "取自：《左传·庄公十年》", exp: "出发..." },
     { content: "多行不义必自毙", subContent: "取自：《左传·隐公元年》", exp: "坦坦荡荡..." },
@@ -75,6 +76,7 @@ function answer_data() {
     { content: "亡羊补牢，未为迟也", subContent: "取自：《战国策·楚策四》", exp: "及时补救..." },
     { content: "之南，奚为北行", subContent: "改自：《战国策·魏策四》", exp: "背道而驰..." },
     { content: "前事之不忘后事之师", subContent: "改自：《战国策·赵策一》", exp: "吸取教训..." },
+    { content: "行百里者半九十", subContent: "改自：《战国策·秦策五》", exp: "越后面越难..." },
 
     { content: "猛虎之犹豫，不若蜂之螫", subContent: "改自：《史记·淮阴侯列传》", exp: "不要再犹豫了..." },
     { content: "抱薪救火", subContent: "取自：《史记·魏世家》", exp: "越弄越糟..." },
@@ -166,7 +168,8 @@ function answer_data() {
     { content: "幽人应未眠", subContent: "取自：《秋夜寄邱员外》", exp: "还在等待..." },
     { content: "坐观垂钓者", subContent: "取自：《望洞庭湖赠张丞相》", exp: "羡慕..." },
     { content: "何处春江无月明", subContent: "取自：《春江花月夜》", exp: "无处不在..." },
-    { content: "此心安处是吾乡", subContent: "取自：《定风波·常羡人间琢玉郎》", exp: "勿忘心安..." }
+    { content: "此心安处是吾乡", subContent: "取自：《定风波·常羡人间琢玉郎》", exp: "勿忘心安..." },
+    { content: "一曲红绡不知数", subContent: "取自：《琵琶行》", exp: "终归平淡..." }
 
   ]
 }
