@@ -274,7 +274,7 @@ Page({
     // 必须加一个temp否则会出错，这TM什么编译器啊！
     var temp = Math.floor(this.deg / 360) * 360
     this.deg = temp + 360
-    // console.log("停止: " + this.deg)
+    console.log("停止: " + this.deg)
 
     var stopAnimation = wx.createAnimation({
       duration: this.defaultStopDuration,
