@@ -102,6 +102,11 @@ Page({
   onUnload: function () {},
 
   /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () { },
+
+  /**
    * 设置默认文本、初始状态，教程动画
    */
   initial: function () {
